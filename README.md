@@ -1,9 +1,5 @@
 # UrbanServe — Home Services Marketplace Database
 
-A fully normalized PostgreSQL relational database for an on-demand home services platform. Built as a DBMS course project (IT214, DA-IICT, Autumn 2026) and extended post-semester with production-grade SQL features.
-
----
-
 ## What is UrbanServe?
 
 UrbanServe connects customers with verified local service professionals for doorstep home services — plumbing, electrical work, AC servicing, deep cleaning, carpentry, laptop repair, salon, and more. The database manages the complete service lifecycle:
