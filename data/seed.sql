@@ -1,13 +1,7 @@
--- ============================================================
--- UrbanServe — Seed Data (v2.0)
--- Realistic dataset: 30 users, 20 services, 100 bookings,
--- proportional payments, cancellations, reviews, earnings,
--- warranty claims, and complaints.
--- ============================================================
+-- UrbanServe — Seed Data
+-- 30 users · 20 services · 100 bookings · 60 payments · 40 reviews · 15 complaints
 
--- ============================================================
--- 1. Users (30 rows: 10 customers, 10 providers, 10 admins)
--- ============================================================
+-- Users (30 rows: 10 customers, 10 providers, 10 admins)
 INSERT INTO Users (user_id, email, password, role, status) VALUES
 (1,  'rahul.sharma@gmail.com',   'hashed_pass_1',  'Customer', 'Active'),
 (2,  'priya.patel@gmail.com',    'hashed_pass_2',  'Customer', 'Active'),
@@ -40,9 +34,7 @@ INSERT INTO Users (user_id, email, password, role, status) VALUES
 (29, 'admin.qa@urbanserve.com',  'admin_hash_9',   'Admin',    'Active'),
 (30, 'admin.ceo@urbanserve.com', 'admin_hash_10',  'Admin',    'Active');
 
--- ============================================================
--- 2. Customer (10 rows)
--- ============================================================
+-- Customer
 INSERT INTO Customer (customer_id, user_id, name, phone) VALUES
 (1,  1,  'Rahul Sharma',  '9000000001'),
 (2,  2,  'Priya Patel',   '9000000002'),
@@ -55,9 +47,7 @@ INSERT INTO Customer (customer_id, user_id, name, phone) VALUES
 (9,  9,  'Rohan Desai',   '9000000009'),
 (10, 10, 'Meera Iyer',    '9000000010');
 
--- ============================================================
--- 3. ServiceProvider (10 rows)
--- ============================================================
+-- ServiceProvider
 INSERT INTO ServiceProvider (provider_id, user_id, experience_years, bio, verification_status) VALUES
 (1,  11, 5, 'Certified electrician with 5 years of residential and commercial experience.',    'Verified'),
 (2,  12, 4, 'Professional deep-cleaning specialist. Eco-friendly products only.',              'Verified'),
@@ -70,9 +60,7 @@ INSERT INTO ServiceProvider (provider_id, user_id, experience_years, bio, verifi
 (9,  19, 5, 'Furniture assembly, repair, and custom carpentry work.',                          'Verified'),
 (10, 20, 6, 'Unisex salon professional — cuts, styling, facials, and bridal packages.',        'Verified');
 
--- ============================================================
--- 4. Admin (10 rows)
--- ============================================================
+-- Admin
 INSERT INTO Admin (admin_id, user_id, admin_role, permissions, department) VALUES
 (1,  21, 'SuperAdmin', 'ALL',    'Operations'),
 (2,  22, 'Manager',    'LIMITED','Support'),
@@ -85,9 +73,7 @@ INSERT INTO Admin (admin_id, user_id, admin_role, permissions, department) VALUE
 (9,  29, 'QA',         'QA',     'Quality Assurance'),
 (10, 30, 'CEO',        'ALL',    'Executive');
 
--- ============================================================
--- 5. City (10 rows)
--- ============================================================
+-- City
 INSERT INTO City (city_id, city_name, state, status) VALUES
 (1,  'Ahmedabad', 'Gujarat',       'Active'),
 (2,  'Surat',     'Gujarat',       'Active'),
@@ -100,9 +86,7 @@ INSERT INTO City (city_id, city_name, state, status) VALUES
 (9,  'Indore',    'Madhya Pradesh','Active'),
 (10, 'Bhopal',    'Madhya Pradesh','Active');
 
--- ============================================================
--- 6. Area (10 rows)
--- ============================================================
+-- Area
 INSERT INTO Area (area_id, city_id, area_name, pincode, status) VALUES
 (1,  1, 'Gota',          '382481', 'Active'),
 (2,  1, 'Satellite',     '380015', 'Active'),
@@ -115,9 +99,7 @@ INSERT INTO Area (area_id, city_id, area_name, pincode, status) VALUES
 (9,  7, 'Dwarka Sec-12', '110075', 'Active'),
 (10, 8, 'Malviya Nagar', '302017', 'Active');
 
--- ============================================================
--- 7. Address (20 rows — 2 per customer)
--- ============================================================
+-- Address (2 per customer)
 INSERT INTO Address (address_id, customer_id, area_id, street, landmark, label, latitude, longitude) VALUES
 (1,  1, 1,  '12, Patel Nagar',     'Near D-Mart',      'Home',   23.1119, 72.5249),
 (2,  1, 2,  'B-204, Shyam Apt',    'Near ISKCON',       'Office', 23.0300, 72.5056),
@@ -140,9 +122,7 @@ INSERT INTO Address (address_id, customer_id, area_id, street, landmark, label, 
 (19, 10, 9, '23, Rajouri Garden',  'Near Metro',        'Home',   28.6400, 77.1200),
 (20, 10, 10,'77, Civil Lines',     'Near High Court',   'Office', 26.9100, 75.7900);
 
--- ============================================================
--- 8. Category (10 rows)
--- ============================================================
+-- Category
 INSERT INTO Category (category_id, category_name, description) VALUES
 (1,  'Cleaning',           'Home, office, and deep cleaning services'),
 (2,  'Electrical',         'Wiring, fan, switch, and appliance installations'),
@@ -155,9 +135,7 @@ INSERT INTO Category (category_id, category_name, description) VALUES
 (9,  'Furniture',          'Furniture repair, assembly, and carpentry'),
 (10, 'Salon & Spa',        'Haircut, grooming, facials, and bridal packages');
 
--- ============================================================
--- 9. Service (20 rows)
--- ============================================================
+-- Service
 INSERT INTO Service (service_id, city_id, category_id, service_name, description, base_price, duration, is_active) VALUES
 (1,  1, 1,  'Bathroom Deep Clean',     'Complete bathroom disinfection and scrubbing',            499,  60,  TRUE),
 (2,  1, 2,  'Fan Repair',              'Ceiling and table fan repair and servicing',               299,  30,  TRUE),
@@ -180,9 +158,7 @@ INSERT INTO Service (service_id, city_id, category_id, service_name, description
 (19, 8, 9,  'Wardrobe Assembly',       'Flat-pack wardrobe assembly with fitting',                 849,  120, TRUE),
 (20, 9, 10, 'Facial & Cleanup',        'Deep pore cleansing facial with steam and massage',        599,  60,  TRUE);
 
--- ============================================================
--- 10. ServiceVariant (20 rows)
--- ============================================================
+-- ServiceVariant
 INSERT INTO ServiceVariant (variant_id, service_id, variant_name, price, duration) VALUES
 (1,  1,  'Standard',         499,  60),
 (2,  1,  'Premium',          699,  90),
@@ -205,9 +181,7 @@ INSERT INTO ServiceVariant (variant_id, service_id, variant_name, price, duratio
 (19, 10, 'Basic Cut',        299,  45),
 (20, 10, 'Cut + Colour',     799,  90);
 
--- ============================================================
--- 11. Offers (50 rows — each provider offers 5 services)
--- ============================================================
+-- Offers (5 services per provider)
 INSERT INTO Offers (provider_id, service_id, custom_price, is_active) VALUES
 -- Provider 1 (Electrician): services 1,2,11,12,18
 (1, 1,  479, TRUE), (1, 2,  279, TRUE), (1, 11, 579, TRUE), (1, 12, 329, TRUE), (1, 18, 479, TRUE),
@@ -230,9 +204,7 @@ INSERT INTO Offers (provider_id, service_id, custom_price, is_active) VALUES
 -- Provider 10 (Salon): services 10,20,1,11,9
 (10, 10, 279, TRUE),(10, 20, 569, TRUE),(10, 1,  459, TRUE),(10, 11, 559, TRUE),(10, 9, 609, TRUE);
 
--- ============================================================
--- 12. ProviderAvailability (20 rows — 2 days each)
--- ============================================================
+-- ProviderAvailability (2 slots per provider)
 INSERT INTO ProviderAvailability (availability_id, provider_id, day_of_week, start_time, end_time) VALUES
 (1,  1,  'Monday',    '09:00', '18:00'),
 (2,  1,  'Wednesday', '09:00', '18:00'),
@@ -255,9 +227,7 @@ INSERT INTO ProviderAvailability (availability_id, provider_id, day_of_week, sta
 (19, 10, 'Monday',    '10:00', '20:00'),
 (20, 10, 'Friday',    '10:00', '20:00');
 
--- ============================================================
--- 13. ProviderDocument (15 rows — verified + some pending)
--- ============================================================
+-- ProviderDocument (mix of verified and pending)
 INSERT INTO ProviderDocument (document_id, provider_id, document_type, description, file_url, verification_status) VALUES
 (1,  1, 'Aadhar',      'Government photo ID',          'docs/p1_aadhar.pdf',   'Verified'),
 (2,  1, 'PAN',         'Income tax PAN card',          'docs/p1_pan.pdf',      'Verified'),
@@ -275,9 +245,7 @@ INSERT INTO ProviderDocument (document_id, provider_id, document_type, descripti
 (14, 9, 'Aadhar',      'Government photo ID',          'docs/p9_aadhar.pdf',   'Verified'),
 (15, 10,'Aadhar',      'Government photo ID',          'docs/p10_aadhar.pdf',  'Verified');
 
--- ============================================================
--- 14. Coupon (10 rows)
--- ============================================================
+-- Coupon
 INSERT INTO Coupon (coupon_id, code, discount_type, min_order, discount_value, usage_limit, valid_from, valid_to) VALUES
 (1,  'FLAT50',   'Flat',    300,  50,  100, '2026-01-01', '2026-12-31'),
 (2,  'FLAT100',  'Flat',    500,  100, 50,  '2026-01-01', '2026-12-31'),
@@ -290,12 +258,9 @@ INSERT INTO Coupon (coupon_id, code, discount_type, min_order, discount_value, u
 (9,  'DISC20',   'Percent', 900,  20,  50,  '2026-01-01', '2026-12-31'),
 (10, 'NEWUSER',  'Flat',    0,    100, 500, '2026-01-01', '2026-12-31');
 
--- ============================================================
--- 15. Booking (100 rows — varied statuses, dates, customers)
--- Bookings 1-60: Completed | 61-80: Cancelled | 81-100: Pending/Confirmed/In-Progress
--- ============================================================
+-- Booking (1-60: Completed · 61-80: Cancelled · 81-100: Pending/Confirmed/In-Progress)
 INSERT INTO Booking (booking_id, customer_id, provider_id, address_id, coupon_id, scheduled_date, scheduled_time, total_amount, status, special_instructions) VALUES
--- Completed bookings (1-60)
+-- completed
 (1,  1, 1, 1,  1,  '2026-01-05', '10:00', 449,  'Completed', 'Please bring disinfectant spray'),
 (2,  2, 2, 3,  2,  '2026-01-06', '11:00', 449,  'Completed', 'Use eco-friendly products only'),
 (3,  3, 3, 5,  NULL,'2026-01-07', '09:00', 379,  'Completed', 'Urgent — pipe burst in bathroom'),
@@ -356,7 +321,7 @@ INSERT INTO Booking (booking_id, customer_id, provider_id, address_id, coupon_id
 (58, 8, 5, 16, 10, '2026-03-03', '09:00', 609,  'Completed', 'Water purifier motor repair'),
 (59, 9, 6, 18, NULL,'2026-03-04', '13:00', 829,  'Completed', 'Cassette AC service and drain clean'),
 (60, 10, 7,20, 1,  '2026-03-05', '10:00', 1349, 'Completed', 'Complete system reformat and OS install'),
--- Cancelled bookings (61-80)
+-- cancelled
 (61, 1, 1, 1,  NULL,'2026-03-06', '10:00', 449,  'Cancelled', 'NA'),
 (62, 2, 2, 3,  NULL,'2026-03-07', '11:00', 549,  'Cancelled', 'NA'),
 (63, 3, 3, 5,  NULL,'2026-03-08', '09:00', 379,  'Cancelled', 'NA'),
@@ -377,7 +342,7 @@ INSERT INTO Booking (booking_id, customer_id, provider_id, address_id, coupon_id
 (78, 8, 10,16, NULL,'2026-03-23', '13:00', 279,  'Cancelled', 'NA'),
 (79, 9, 1, 18, NULL,'2026-03-24', '10:00', 449,  'Cancelled', 'NA'),
 (80, 10, 2,20, NULL,'2026-03-25', '11:00', 549,  'Cancelled', 'NA'),
--- Active bookings (81-100)
+-- active
 (81, 1, 1, 1,  NULL,'2026-05-15', '10:00', 449,  'Pending',     'First time using service'),
 (82, 2, 2, 3,  2,  '2026-05-15', '11:00', 449,  'Pending',     'Please bring mop and bucket'),
 (83, 3, 3, 5,  NULL,'2026-05-16', '09:00', 379,  'Confirmed',   'Gate will be open'),
@@ -399,9 +364,7 @@ INSERT INTO Booking (booking_id, customer_id, provider_id, address_id, coupon_id
 (99, 9, 4, 18, NULL,'2026-05-24', '10:00', 919,  'Pending',     'Texture paint for feature wall'),
 (100,10, 5,20, 1,  '2026-05-24', '14:00', 569,  'Pending',     'Honda Activa full service');
 
--- ============================================================
--- 16. BookingItem (100 rows — one item per booking)
--- ============================================================
+-- BookingItem (one item per booking)
 INSERT INTO BookingItem (item_no, booking_id, service_id, quantity, unit_price, custom_price) VALUES
 (1,1,1,1,499,449),(1,2,1,1,499,449),(1,3,3,1,399,379),(1,4,4,1,999,799),
 (1,5,5,1,699,669),(1,6,6,1,849,599),(1,7,7,1,1499,1399),(1,8,8,1,999,699),
@@ -429,11 +392,9 @@ INSERT INTO BookingItem (item_no, booking_id, service_id, quantity, unit_price, 
 (1,93,8,1,999,949),(1,94,9,1,649,799),(1,95,20,1,599,569),(1,96,2,1,299,299),
 (1,97,11,1,599,449),(1,98,13,1,299,279),(1,99,4,1,999,919),(1,100,5,1,699,569);
 
--- ============================================================
--- 17. BookingStatusLog (varied statuses for bookings 1-100)
--- ============================================================
+-- BookingStatusLog
 INSERT INTO BookingStatusLog (log_id, booking_id, status, remarks) VALUES
--- Completed bookings — each has 4 log entries
+-- full 4-step trail for first 10 completed bookings
 (1,  1, 'Pending',     'Booking created'),(2,  1, 'Confirmed',   'Provider accepted'),(3,  1, 'In-Progress', 'Service started'),(4,  1, 'Completed',   'Service done successfully'),
 (5,  2, 'Pending',     'Booking created'),(6,  2, 'Confirmed',   'Provider accepted'),(7,  2, 'In-Progress', 'Service started'),(8,  2, 'Completed',   'Customer satisfied'),
 (9,  3, 'Pending',     'Booking created'),(10, 3, 'Confirmed',   'Provider accepted'),(11, 3, 'In-Progress', 'Service started'),(12, 3, 'Completed',   'Pipe fixed'),
@@ -444,7 +405,7 @@ INSERT INTO BookingStatusLog (log_id, booking_id, status, remarks) VALUES
 (29, 8, 'Pending',     'Booking created'),(30, 8, 'Confirmed',   'Provider accepted'),(31, 8, 'In-Progress', 'Service started'),(32, 8, 'Completed',   'TV repaired'),
 (33, 9, 'Pending',     'Booking created'),(34, 9, 'Confirmed',   'Provider accepted'),(35, 9, 'In-Progress', 'Service started'),(36, 9, 'Completed',   'Sofa repaired'),
 (37, 10,'Pending',     'Booking created'),(38, 10,'Confirmed',   'Provider accepted'),(39, 10,'In-Progress', 'Service started'),(40, 10,'Completed',   'Haircut done'),
--- Abbreviated logs for bookings 11-60 (single completed entry)
+-- single completed entry for bookings 11-60
 (41, 11,'Completed','Kitchen cleaned'),(42,12,'Completed','Tap installed'),(43,13,'Completed','Waterproofing done'),(44,14,'Completed','Fridge repaired'),
 (45, 15,'Completed','AC serviced'),(46,16,'Completed','Virus removed'),(47,17,'Completed','TV mounted'),(48,18,'Completed','Wardrobe assembled'),
 (49, 19,'Completed','Facial done'),(50,20,'Completed','Switchboard fixed'),(51,21,'Completed','Pipe fixed'),(52,22,'Completed','Room painted'),
@@ -458,7 +419,7 @@ INSERT INTO BookingStatusLog (log_id, booking_id, status, remarks) VALUES
 (81, 51,'Completed','TV updated'),(82,52,'Completed','Chair fixed'),(83,53,'Completed','Pedicure done'),(84,54,'Completed','Switchboard replaced'),
 (85, 55,'Completed','Fridge cleaned'),(86,56,'Completed','Tap installed'),(87,57,'Completed','Rooms painted'),(88,58,'Completed','Purifier fixed'),
 (89, 59,'Completed','AC drained'),(90,60,'Completed','OS installed'),
--- Cancelled bookings (single log each)
+-- single cancellation entry for each cancelled booking
 (91, 61,'Cancelled','Provider unavailable'),(92,62,'Cancelled','Customer changed mind'),(93,63,'Cancelled','Schedule conflict'),
 (94, 64,'Cancelled','Better offer found'),(95,65,'Cancelled','Provider no-show'),(96,66,'Cancelled','Emergency at home'),
 (97, 67,'Cancelled','Wrong service booked'),(98,68,'Cancelled','Provider unavailable'),(99,69,'Cancelled','Customer relocated'),
@@ -466,7 +427,7 @@ INSERT INTO BookingStatusLog (log_id, booking_id, status, remarks) VALUES
 (103,73,'Cancelled','Provider no-show'),(104,74,'Cancelled','Emergency'),(105,75,'Cancelled','Better deal found'),
 (106,76,'Cancelled','Provider unavailable'),(107,77,'Cancelled','Wrong booking'),(108,78,'Cancelled','Customer out of city'),
 (109,79,'Cancelled','No response from provider'),(110,80,'Cancelled','Double booked'),
--- Active bookings
+-- active bookings
 (111,81,'Pending','Booking created — awaiting confirmation'),(112,82,'Pending','Booking created'),(113,83,'Confirmed','Provider confirmed'),
 (114,84,'Confirmed','Provider confirmed'),(115,85,'Confirmed','Provider confirmed'),(116,86,'In-Progress','Provider on site'),
 (117,87,'In-Progress','Laptop received by technician'),(118,88,'In-Progress','Panel under inspection'),(119,89,'Confirmed','Slot confirmed'),
@@ -475,9 +436,7 @@ INSERT INTO BookingStatusLog (log_id, booking_id, status, remarks) VALUES
 (126,96,'Pending','Awaiting provider'),(127,97,'Confirmed','Provider confirmed'),(128,98,'Confirmed','Provider confirmed'),
 (129,99,'Pending','Awaiting provider'),(130,100,'Pending','Awaiting provider');
 
--- ============================================================
--- 18. Payment (60 rows — one per completed booking 1-60)
--- ============================================================
+-- Payment (one per completed booking)
 INSERT INTO Payment (payment_id, booking_id, payment_method, amount, gateway_ref, status, paid_at) VALUES
 (1, 1,  'UPI',    449,  'TXN100001', 'Paid', '2026-01-05 11:00:00'),
 (2, 2,  'Card',   449,  'TXN100002', 'Paid', '2026-01-06 12:30:00'),
@@ -540,9 +499,7 @@ INSERT INTO Payment (payment_id, booking_id, payment_method, amount, gateway_ref
 (59,59, 'Card',   829,  'TXN100059', 'Paid', '2026-03-04 15:00:00'),
 (60,60, 'Wallet', 1349, 'TXN100060', 'Paid', '2026-03-05 12:00:00');
 
--- ============================================================
--- 19. Cancellation (20 rows — for cancelled bookings 61-80)
--- ============================================================
+-- Cancellation (bookings 61-80)
 INSERT INTO Cancellation (cancel_id, booking_id, reason, refund_amount, refund_status) VALUES
 (1,  61, 'Provider unavailable on booked slot',        449,  'Refunded'),
 (2,  62, 'Customer decided to postpone',               549,  'Refunded'),
@@ -565,9 +522,7 @@ INSERT INTO Cancellation (cancel_id, booking_id, reason, refund_amount, refund_s
 (19, 79, 'No response from provider after 2 hours',    449,  'Refunded'),
 (20, 80, 'Double booked by mistake',                   549,  'Refunded');
 
--- ============================================================
--- 20. ProviderReview (40 rows — for a subset of completed bookings)
--- ============================================================
+-- ProviderReview (40 reviews across completed bookings)
 INSERT INTO ProviderReview (review_id, provider_id, booking_id, customer_id, rating, comment) VALUES
 (1,  1, 1,  1,  4.5, 'Very professional and on time. Great work!'),
 (2,  2, 2,  2,  4.0, 'Clean and efficient. Will book again.'),
@@ -610,9 +565,7 @@ INSERT INTO ProviderReview (review_id, provider_id, booking_id, customer_id, rat
 (39, 4, 39, 9,  4.5, 'Three rooms painted smoothly in one day.'),
 (40, 5, 40, 10, 3.8, 'Bike runs better but one issue still persists.');
 
--- ============================================================
--- 21. ServiceReview (30 rows — for subset of completed bookings)
--- ============================================================
+-- ServiceReview (30 reviews across completed bookings)
 INSERT INTO ServiceReview (review_id, service_id, booking_id, customer_id, rating, comment) VALUES
 (1,  1,  1,  1,  4.5, 'Bathroom is spotless. Great service.'),
 (2,  1,  2,  2,  4.0, 'Thorough cleaning, smells fresh now.'),
@@ -645,9 +598,7 @@ INSERT INTO ServiceReview (review_id, service_id, booking_id, customer_id, ratin
 (29, 4,  39, 9,  4.5, 'Three room paint job looks very professional.'),
 (30, 5,  40, 10, 3.8, 'Bike better but one issue still to be fixed.');
 
--- ============================================================
--- 22. Complaint (15 rows — various users and bookings)
--- ============================================================
+-- Complaint
 INSERT INTO Complaint (complaint_id, user_id, booking_id, subject, description, priority, status, resolution_notes) VALUES
 (1,  5,  5,  'Delay in arrival',       'Provider arrived 1 hour late with no communication.',            'Medium', 'Closed',       'Provider warned. Refund of Rs.50 issued.'),
 (2,  8,  8,  'Incomplete repair',      'TV fixed but remote sensor still not responding after visit.',    'High',   'Closed',       'Provider sent back — issue resolved.'),

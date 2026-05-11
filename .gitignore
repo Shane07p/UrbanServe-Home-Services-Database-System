@@ -1,0 +1,12 @@
+# PostgreSQL
+*.dump
+*.backup
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
