@@ -1,0 +1,668 @@
+-- ============================================================
+-- UrbanServe — Seed Data (v2.0)
+-- Realistic dataset: 30 users, 20 services, 100 bookings,
+-- proportional payments, cancellations, reviews, earnings,
+-- warranty claims, and complaints.
+-- ============================================================
+
+-- ============================================================
+-- 1. Users (30 rows: 10 customers, 10 providers, 10 admins)
+-- ============================================================
+INSERT INTO Users (user_id, email, password, role, status) VALUES
+(1,  'rahul.sharma@gmail.com',   'hashed_pass_1',  'Customer', 'Active'),
+(2,  'priya.patel@gmail.com',    'hashed_pass_2',  'Customer', 'Active'),
+(3,  'amit.shah@gmail.com',      'hashed_pass_3',  'Customer', 'Active'),
+(4,  'sneha.joshi@gmail.com',    'hashed_pass_4',  'Customer', 'Active'),
+(5,  'karan.mehta@gmail.com',    'hashed_pass_5',  'Customer', 'Active'),
+(6,  'neha.gupta@gmail.com',     'hashed_pass_6',  'Customer', 'Active'),
+(7,  'vikram.singh@gmail.com',   'hashed_pass_7',  'Customer', 'Active'),
+(8,  'ananya.reddy@gmail.com',   'hashed_pass_8',  'Customer', 'Active'),
+(9,  'rohan.desai@gmail.com',    'hashed_pass_9',  'Customer', 'Active'),
+(10, 'meera.iyer@gmail.com',     'hashed_pass_10', 'Customer', 'Active'),
+(11, 'suresh.elec@gmail.com',    'hashed_pass_11', 'Provider', 'Active'),
+(12, 'deepa.clean@gmail.com',    'hashed_pass_12', 'Provider', 'Active'),
+(13, 'ramesh.plumb@gmail.com',   'hashed_pass_13', 'Provider', 'Active'),
+(14, 'kavya.paint@gmail.com',    'hashed_pass_14', 'Provider', 'Active'),
+(15, 'arun.mech@gmail.com',      'hashed_pass_15', 'Provider', 'Inactive'),
+(16, 'pooja.ac@gmail.com',       'hashed_pass_16', 'Provider', 'Active'),
+(17, 'nitin.tech@gmail.com',     'hashed_pass_17', 'Provider', 'Active'),
+(18, 'sunita.tv@gmail.com',      'hashed_pass_18', 'Provider', 'Active'),
+(19, 'manoj.furn@gmail.com',     'hashed_pass_19', 'Provider', 'Active'),
+(20, 'rekha.salon@gmail.com',    'hashed_pass_20', 'Provider', 'Active'),
+(21, 'admin.ops@urbanserve.com', 'admin_hash_1',   'Admin',    'Active'),
+(22, 'admin.sup@urbanserve.com', 'admin_hash_2',   'Admin',    'Active'),
+(23, 'admin.hr@urbanserve.com',  'admin_hash_3',   'Admin',    'Active'),
+(24, 'admin.fin@urbanserve.com', 'admin_hash_4',   'Admin',    'Active'),
+(25, 'admin.tech@urbanserve.com','admin_hash_5',   'Admin',    'Active'),
+(26, 'admin.aud@urbanserve.com', 'admin_hash_6',   'Admin',    'Active'),
+(27, 'admin.cat@urbanserve.com', 'admin_hash_7',   'Admin',    'Active'),
+(28, 'admin.mkt@urbanserve.com', 'admin_hash_8',   'Admin',    'Active'),
+(29, 'admin.qa@urbanserve.com',  'admin_hash_9',   'Admin',    'Active'),
+(30, 'admin.ceo@urbanserve.com', 'admin_hash_10',  'Admin',    'Active');
+
+-- ============================================================
+-- 2. Customer (10 rows)
+-- ============================================================
+INSERT INTO Customer (customer_id, user_id, name, phone) VALUES
+(1,  1,  'Rahul Sharma',  '9000000001'),
+(2,  2,  'Priya Patel',   '9000000002'),
+(3,  3,  'Amit Shah',     '9000000003'),
+(4,  4,  'Sneha Joshi',   '9000000004'),
+(5,  5,  'Karan Mehta',   '9000000005'),
+(6,  6,  'Neha Gupta',    '9000000006'),
+(7,  7,  'Vikram Singh',  '9000000007'),
+(8,  8,  'Ananya Reddy',  '9000000008'),
+(9,  9,  'Rohan Desai',   '9000000009'),
+(10, 10, 'Meera Iyer',    '9000000010');
+
+-- ============================================================
+-- 3. ServiceProvider (10 rows)
+-- ============================================================
+INSERT INTO ServiceProvider (provider_id, user_id, experience_years, bio, verification_status) VALUES
+(1,  11, 5, 'Certified electrician with 5 years of residential and commercial experience.',    'Verified'),
+(2,  12, 4, 'Professional deep-cleaning specialist. Eco-friendly products only.',              'Verified'),
+(3,  13, 6, 'Licensed plumber. Handles leakages, installations, and drainage systems.',        'Verified'),
+(4,  14, 3, 'Interior painter with expertise in textures, wallpapers, and waterproofing.',     'Verified'),
+(5,  15, 2, 'Two-wheeler and small appliance mechanic.',                                       'Pending'),
+(6,  16, 7, 'AC servicing expert — all brands, split and window units.',                      'Verified'),
+(7,  17, 8, 'Hardware and software laptop repair specialist. Certified by Dell & HP.',         'Verified'),
+(8,  18, 4, 'LED and LCD TV repair technician with panel-level expertise.',                    'Verified'),
+(9,  19, 5, 'Furniture assembly, repair, and custom carpentry work.',                          'Verified'),
+(10, 20, 6, 'Unisex salon professional — cuts, styling, facials, and bridal packages.',        'Verified');
+
+-- ============================================================
+-- 4. Admin (10 rows)
+-- ============================================================
+INSERT INTO Admin (admin_id, user_id, admin_role, permissions, department) VALUES
+(1,  21, 'SuperAdmin', 'ALL',    'Operations'),
+(2,  22, 'Manager',    'LIMITED','Support'),
+(3,  23, 'HR',         'EMP',    'Human Resources'),
+(4,  24, 'Finance',    'FIN',    'Finance'),
+(5,  25, 'TechLead',   'TECH',   'Engineering'),
+(6,  26, 'Auditor',    'VIEW',   'Audit'),
+(7,  27, 'CatManager', 'CAT',    'Catalog'),
+(8,  28, 'Marketing',  'MKT',    'Marketing'),
+(9,  29, 'QA',         'QA',     'Quality Assurance'),
+(10, 30, 'CEO',        'ALL',    'Executive');
+
+-- ============================================================
+-- 5. City (10 rows)
+-- ============================================================
+INSERT INTO City (city_id, city_name, state, status) VALUES
+(1,  'Ahmedabad', 'Gujarat',       'Active'),
+(2,  'Surat',     'Gujarat',       'Active'),
+(3,  'Vadodara',  'Gujarat',       'Active'),
+(4,  'Rajkot',    'Gujarat',       'Active'),
+(5,  'Mumbai',    'Maharashtra',   'Active'),
+(6,  'Pune',      'Maharashtra',   'Active'),
+(7,  'Delhi',     'Delhi',         'Active'),
+(8,  'Jaipur',    'Rajasthan',     'Active'),
+(9,  'Indore',    'Madhya Pradesh','Active'),
+(10, 'Bhopal',    'Madhya Pradesh','Active');
+
+-- ============================================================
+-- 6. Area (10 rows)
+-- ============================================================
+INSERT INTO Area (area_id, city_id, area_name, pincode, status) VALUES
+(1,  1, 'Gota',          '382481', 'Active'),
+(2,  1, 'Satellite',     '380015', 'Active'),
+(3,  2, 'Adajan',        '395009', 'Active'),
+(4,  2, 'Vesu',          '395007', 'Active'),
+(5,  3, 'Akota',         '390020', 'Active'),
+(6,  4, 'Kalavad Road',  '360001', 'Active'),
+(7,  5, 'Andheri West',  '400053', 'Active'),
+(8,  6, 'Hinjewadi',     '411057', 'Active'),
+(9,  7, 'Dwarka Sec-12', '110075', 'Active'),
+(10, 8, 'Malviya Nagar', '302017', 'Active');
+
+-- ============================================================
+-- 7. Address (20 rows — 2 per customer)
+-- ============================================================
+INSERT INTO Address (address_id, customer_id, area_id, street, landmark, label, latitude, longitude) VALUES
+(1,  1, 1,  '12, Patel Nagar',     'Near D-Mart',      'Home',   23.1119, 72.5249),
+(2,  1, 2,  'B-204, Shyam Apt',    'Near ISKCON',       'Office', 23.0300, 72.5056),
+(3,  2, 3,  '5, Green Park',       'Near Adajan Circle','Home',   21.1966, 72.7956),
+(4,  2, 4,  '101, Silver Apt',     'Near VR Mall',      'Office', 21.1640, 72.7983),
+(5,  3, 5,  '7, MG Road',          'Near Akota Garden', 'Home',   22.2946, 73.1760),
+(6,  3, 6,  '22, Race Course',     'Near Airport',      'Office', 22.3039, 70.7897),
+(7,  4, 7,  '301, Versova',        'Near Carter Rd',    'Home',   19.1136, 72.8697),
+(8,  4, 8,  'C-Wing, Tech Park',   'Near Infosys',      'Office', 18.5944, 73.7352),
+(9,  5, 9,  'A-14, Dwarka Sec 7',  'Near Metro Stn',    'Home',   28.5921, 77.0460),
+(10, 5, 10, '55, Bapu Nagar',      'Near Gandhi Nagar', 'Office', 26.8927, 75.7981),
+(11, 6, 1,  '3, Rose Society',     'Near Lake',         'Home',   23.1200, 72.5300),
+(12, 6, 2,  'F-5, Corporate Hub',  'Near SG Highway',   'Office', 23.0350, 72.5070),
+(13, 7, 3,  '88, Sea View',        'Near Beach',        'Home',   21.2000, 72.8100),
+(14, 7, 4,  '9, Sunrise Apt',      'Near Textile Mkt',  'Office', 21.1700, 72.8050),
+(15, 8, 5,  '45, Alkapuri',        'Near Sayaji Hotel', 'Home',   22.3100, 73.1800),
+(16, 8, 6,  '10, University Rd',   'Near MSU',          'Office', 22.3200, 73.1900),
+(17, 9, 7,  '17, Four Bungalows',  'Near Andheri Stn',  'Home',   19.1200, 72.8300),
+(18, 9, 8,  'Plot 12, IT Hub',     'Near Wakad',        'Office', 18.6000, 73.7400),
+(19, 10, 9, '23, Rajouri Garden',  'Near Metro',        'Home',   28.6400, 77.1200),
+(20, 10, 10,'77, Civil Lines',     'Near High Court',   'Office', 26.9100, 75.7900);
+
+-- ============================================================
+-- 8. Category (10 rows)
+-- ============================================================
+INSERT INTO Category (category_id, category_name, description) VALUES
+(1,  'Cleaning',           'Home, office, and deep cleaning services'),
+(2,  'Electrical',         'Wiring, fan, switch, and appliance installations'),
+(3,  'Plumbing',           'Pipe, tap, drainage, and water heater services'),
+(4,  'Painting',           'Interior, exterior wall painting and waterproofing'),
+(5,  'Appliance Repair',   'General household appliance repair and servicing'),
+(6,  'AC Services',        'AC installation, servicing, and gas refill'),
+(7,  'Laptop & Computer',  'Hardware, software, and networking repair'),
+(8,  'TV & Electronics',   'Television and home electronics repair'),
+(9,  'Furniture',          'Furniture repair, assembly, and carpentry'),
+(10, 'Salon & Spa',        'Haircut, grooming, facials, and bridal packages');
+
+-- ============================================================
+-- 9. Service (20 rows)
+-- ============================================================
+INSERT INTO Service (service_id, city_id, category_id, service_name, description, base_price, duration, is_active) VALUES
+(1,  1, 1,  'Bathroom Deep Clean',     'Complete bathroom disinfection and scrubbing',            499,  60,  TRUE),
+(2,  1, 2,  'Fan Repair',              'Ceiling and table fan repair and servicing',               299,  30,  TRUE),
+(3,  2, 3,  'Pipe Leak Repair',        'Detect and fix leaking pipes and joints',                  399,  45,  TRUE),
+(4,  2, 4,  'Interior Wall Painting',  'Per room interior painting with primer',                   999,  120, TRUE),
+(5,  3, 5,  'Washing Machine Repair',  'Top-load and front-load washing machine repair',           699,  90,  TRUE),
+(6,  4, 6,  'AC Gas Refill',           'Split and window AC refrigerant gas recharge',             849,  60,  TRUE),
+(7,  5, 7,  'Laptop Screen Repair',    'Cracked or dead screen replacement',                       1499, 120, TRUE),
+(8,  6, 8,  'LED TV Repair',           'Panel, backlight and board level TV repair',               999,  60,  TRUE),
+(9,  7, 9,  'Sofa Repair',             'Fabric replacement and frame repair for sofas',            649,  90,  TRUE),
+(10, 8, 10, 'Hair Cut & Styling',      'Unisex haircut with wash and blow-dry',                    299,  45,  TRUE),
+(11, 1, 1,  'Kitchen Deep Clean',      'Full kitchen degreasing and appliance exterior clean',     599,  75,  TRUE),
+(12, 1, 2,  'Switchboard Repair',      'Faulty switchboard rewiring and socket replacement',       349,  40,  TRUE),
+(13, 2, 3,  'Water Tap Installation',  'New tap fitting and old tap replacement',                  299,  30,  TRUE),
+(14, 3, 4,  'Waterproofing',           'Terrace and bathroom waterproofing treatment',             1499, 180, TRUE),
+(15, 4, 5,  'Refrigerator Repair',     'Compressor, thermostat, and cooling repair',               799,  90,  TRUE),
+(16, 5, 6,  'AC Full Service',         'Filter clean, coil wash, and performance check',           599,  90,  TRUE),
+(17, 6, 7,  'Laptop Virus Removal',    'Malware removal, OS reinstall, and speed boost',           799,  120, TRUE),
+(18, 7, 8,  'TV Wall Mount',           'Safe wall mounting with wire management',                  499,  60,  TRUE),
+(19, 8, 9,  'Wardrobe Assembly',       'Flat-pack wardrobe assembly with fitting',                 849,  120, TRUE),
+(20, 9, 10, 'Facial & Cleanup',        'Deep pore cleansing facial with steam and massage',        599,  60,  TRUE);
+
+-- ============================================================
+-- 10. ServiceVariant (20 rows)
+-- ============================================================
+INSERT INTO ServiceVariant (variant_id, service_id, variant_name, price, duration) VALUES
+(1,  1,  'Standard',         499,  60),
+(2,  1,  'Premium',          699,  90),
+(3,  2,  'Basic Repair',     299,  30),
+(4,  2,  'Full Overhaul',    499,  60),
+(5,  3,  'Minor Fix',        399,  45),
+(6,  3,  'Emergency',        599,  60),
+(7,  4,  'One Room',         999,  120),
+(8,  4,  'Full Flat 2BHK',   2499, 300),
+(9,  5,  'Diagnosis Only',   299,  30),
+(10, 5,  'Full Repair',      699,  90),
+(11, 6,  'Gas Refill Only',  849,  60),
+(12, 6,  'Gas + Service',    1099, 90),
+(13, 7,  'Screen Replace',   1499, 120),
+(14, 7,  'Motherboard Fix',  1999, 180),
+(15, 8,  'Panel Repair',     999,  60),
+(16, 8,  'Board Level',      1499, 90),
+(17, 9,  'Fabric Repair',    649,  90),
+(18, 9,  'Full Restoration', 1199, 150),
+(19, 10, 'Basic Cut',        299,  45),
+(20, 10, 'Cut + Colour',     799,  90);
+
+-- ============================================================
+-- 11. Offers (50 rows — each provider offers 5 services)
+-- ============================================================
+INSERT INTO Offers (provider_id, service_id, custom_price, is_active) VALUES
+-- Provider 1 (Electrician): services 1,2,11,12,18
+(1, 1,  479, TRUE), (1, 2,  279, TRUE), (1, 11, 579, TRUE), (1, 12, 329, TRUE), (1, 18, 479, TRUE),
+-- Provider 2 (Cleaner): services 1,11,4,5,9
+(2, 1,  449, TRUE), (2, 11, 549, TRUE), (2, 4,  949, TRUE), (2, 5,  649, TRUE), (2, 9,  599, TRUE),
+-- Provider 3 (Plumber): services 3,13,14,5,15
+(3, 3,  379, TRUE), (3, 13, 279, TRUE), (3, 14, 1399, TRUE),(3, 5,  649, TRUE), (3, 15, 749, TRUE),
+-- Provider 4 (Painter): services 4,14,1,11,9
+(4, 4,  949, TRUE), (4, 14, 1399, TRUE),(4, 1,  469, TRUE), (4, 11, 569, TRUE), (4, 9,  619, TRUE),
+-- Provider 5 (Mechanic): services 5,15,6,16,7
+(5, 5,  669, TRUE), (5, 15, 769, TRUE), (5, 6,  799, TRUE), (5, 16, 569, TRUE), (5, 7,  1399, TRUE),
+-- Provider 6 (AC): services 6,16,2,12,15
+(6, 6,  799, TRUE), (6, 16, 549, TRUE), (6, 2,  269, TRUE), (6, 12, 319, TRUE), (6, 15, 749, TRUE),
+-- Provider 7 (Laptop): services 7,17,8,18,2
+(7, 7,  1399, TRUE),(7, 17, 749, TRUE), (7, 8,  949, TRUE), (7, 18, 469, TRUE), (7, 2,  279, TRUE),
+-- Provider 8 (TV): services 8,18,7,17,9
+(8, 8,  949, TRUE), (8, 18, 469, TRUE), (8, 7,  1449, TRUE),(8, 17, 769, TRUE), (8, 9,  619, TRUE),
+-- Provider 9 (Furniture): services 9,19,4,14,1
+(9, 9,  599, TRUE), (9, 19, 799, TRUE), (9, 4,  929, TRUE), (9, 14, 1349, TRUE),(9, 1,  469, TRUE),
+-- Provider 10 (Salon): services 10,20,1,11,9
+(10, 10, 279, TRUE),(10, 20, 569, TRUE),(10, 1,  459, TRUE),(10, 11, 559, TRUE),(10, 9, 609, TRUE);
+
+-- ============================================================
+-- 12. ProviderAvailability (20 rows — 2 days each)
+-- ============================================================
+INSERT INTO ProviderAvailability (availability_id, provider_id, day_of_week, start_time, end_time) VALUES
+(1,  1,  'Monday',    '09:00', '18:00'),
+(2,  1,  'Wednesday', '09:00', '18:00'),
+(3,  2,  'Tuesday',   '09:00', '18:00'),
+(4,  2,  'Thursday',  '09:00', '18:00'),
+(5,  3,  'Monday',    '08:00', '17:00'),
+(6,  3,  'Friday',    '08:00', '17:00'),
+(7,  4,  'Wednesday', '10:00', '19:00'),
+(8,  4,  'Saturday',  '10:00', '19:00'),
+(9,  5,  'Tuesday',   '09:00', '17:00'),
+(10, 5,  'Thursday',  '09:00', '17:00'),
+(11, 6,  'Monday',    '08:00', '20:00'),
+(12, 6,  'Saturday',  '08:00', '20:00'),
+(13, 7,  'Tuesday',   '10:00', '18:00'),
+(14, 7,  'Friday',    '10:00', '18:00'),
+(15, 8,  'Wednesday', '09:00', '17:00'),
+(16, 8,  'Sunday',    '09:00', '17:00'),
+(17, 9,  'Thursday',  '09:00', '18:00'),
+(18, 9,  'Saturday',  '09:00', '18:00'),
+(19, 10, 'Monday',    '10:00', '20:00'),
+(20, 10, 'Friday',    '10:00', '20:00');
+
+-- ============================================================
+-- 13. ProviderDocument (15 rows — verified + some pending)
+-- ============================================================
+INSERT INTO ProviderDocument (document_id, provider_id, document_type, description, file_url, verification_status) VALUES
+(1,  1, 'Aadhar',      'Government photo ID',          'docs/p1_aadhar.pdf',   'Verified'),
+(2,  1, 'PAN',         'Income tax PAN card',          'docs/p1_pan.pdf',      'Verified'),
+(3,  1, 'License',     'Electrical work trade license','docs/p1_lic.pdf',      'Verified'),
+(4,  2, 'Aadhar',      'Government photo ID',          'docs/p2_aadhar.pdf',   'Verified'),
+(5,  2, 'PAN',         'Income tax PAN card',          'docs/p2_pan.pdf',      'Verified'),
+(6,  3, 'Aadhar',      'Government photo ID',          'docs/p3_aadhar.pdf',   'Verified'),
+(7,  3, 'License',     'Plumbing trade license',       'docs/p3_lic.pdf',      'Verified'),
+(8,  4, 'Aadhar',      'Government photo ID',          'docs/p4_aadhar.pdf',   'Verified'),
+(9,  4, 'PAN',         'Income tax PAN card',          'docs/p4_pan.pdf',      'Pending'),
+(10, 5, 'Aadhar',      'Government photo ID',          'docs/p5_aadhar.pdf',   'Verified'),
+(11, 6, 'Aadhar',      'Government photo ID',          'docs/p6_aadhar.pdf',   'Verified'),
+(12, 6, 'License',     'AC technician certification',  'docs/p6_lic.pdf',      'Verified'),
+(13, 7, 'Certificate', 'Dell certified technician',    'docs/p7_cert.pdf',     'Verified'),
+(14, 9, 'Aadhar',      'Government photo ID',          'docs/p9_aadhar.pdf',   'Verified'),
+(15, 10,'Aadhar',      'Government photo ID',          'docs/p10_aadhar.pdf',  'Verified');
+
+-- ============================================================
+-- 14. Coupon (10 rows)
+-- ============================================================
+INSERT INTO Coupon (coupon_id, code, discount_type, min_order, discount_value, usage_limit, valid_from, valid_to) VALUES
+(1,  'FLAT50',   'Flat',    300,  50,  100, '2026-01-01', '2026-12-31'),
+(2,  'FLAT100',  'Flat',    500,  100, 50,  '2026-01-01', '2026-12-31'),
+(3,  'FLAT150',  'Flat',    700,  150, 50,  '2026-01-01', '2026-12-31'),
+(4,  'FLAT200',  'Flat',    1000, 200, 30,  '2026-01-01', '2026-12-31'),
+(5,  'FLAT300',  'Flat',    1500, 300, 20,  '2026-01-01', '2026-12-31'),
+(6,  'DISC5',    'Percent', 200,  5,   200, '2026-01-01', '2026-12-31'),
+(7,  'DISC10',   'Percent', 400,  10,  100, '2026-01-01', '2026-12-31'),
+(8,  'DISC15',   'Percent', 600,  15,  75,  '2026-01-01', '2026-12-31'),
+(9,  'DISC20',   'Percent', 900,  20,  50,  '2026-01-01', '2026-12-31'),
+(10, 'NEWUSER',  'Flat',    0,    100, 500, '2026-01-01', '2026-12-31');
+
+-- ============================================================
+-- 15. Booking (100 rows — varied statuses, dates, customers)
+-- Bookings 1-60: Completed | 61-80: Cancelled | 81-100: Pending/Confirmed/In-Progress
+-- ============================================================
+INSERT INTO Booking (booking_id, customer_id, provider_id, address_id, coupon_id, scheduled_date, scheduled_time, total_amount, status, special_instructions) VALUES
+-- Completed bookings (1-60)
+(1,  1, 1, 1,  1,  '2026-01-05', '10:00', 449,  'Completed', 'Please bring disinfectant spray'),
+(2,  2, 2, 3,  2,  '2026-01-06', '11:00', 449,  'Completed', 'Use eco-friendly products only'),
+(3,  3, 3, 5,  NULL,'2026-01-07', '09:00', 379,  'Completed', 'Urgent — pipe burst in bathroom'),
+(4,  4, 4, 7,  3,  '2026-01-08', '10:00', 799,  'Completed', 'Use matte finish paint'),
+(5,  5, 5, 9,  NULL,'2026-01-09', '14:00', 669,  'Completed', 'Machine makes grinding noise'),
+(6,  6, 6, 11, 4,  '2026-01-10', '09:00', 599,  'Completed', 'Samsung 1.5 ton split AC'),
+(7,  7, 7, 13, NULL,'2026-01-11', '11:00', 1399, 'Completed', 'Dell Inspiron 15 — screen cracked'),
+(8,  8, 8, 15, 5,  '2026-01-12', '15:00', 699,  'Completed', 'Sony 43-inch LED'),
+(9,  9, 9, 17, NULL,'2026-01-13', '10:00', 599,  'Completed', 'L-shaped sofa fabric repair'),
+(10, 10,10, 19, 6,  '2026-01-14', '13:00', 279,  'Completed', 'Ladies haircut, medium length'),
+(11, 1, 2, 2,  NULL,'2026-01-15', '09:00', 549,  'Completed', 'Kitchen deep clean needed'),
+(12, 2, 3, 4,  7,  '2026-01-16', '10:00', 279,  'Completed', 'New tap installation in kitchen'),
+(13, 3, 4, 6,  NULL,'2026-01-17', '11:00', 1399, 'Completed', 'Terrace waterproofing — monsoon prep'),
+(14, 4, 5, 8,  8,  '2026-01-18', '14:00', 649,  'Completed', 'LG refrigerator not cooling'),
+(15, 5, 6, 10, NULL,'2026-01-19', '09:00', 549,  'Completed', 'Hitachi AC — full service needed'),
+(16, 6, 7, 12, 9,  '2026-01-20', '10:00', 559,  'Completed', 'HP laptop — virus and slow performance'),
+(17, 7, 8, 14, NULL,'2026-01-21', '15:00', 469,  'Completed', 'TV needs wall mount in bedroom'),
+(18, 8, 9, 16, 10, '2026-01-22', '11:00', 749,  'Completed', 'IKEA wardrobe assembly — 4 doors'),
+(19, 9, 10,18, NULL,'2026-01-23', '13:00', 569,  'Completed', 'Full facial and cleanup'),
+(20, 10, 1,20, 1,  '2026-01-24', '10:00', 329,  'Completed', 'Switchboard in hall — sparking issue'),
+(21, 1, 3, 1,  NULL,'2026-01-25', '09:00', 599,  'Completed', 'Emergency pipe fix in kitchen'),
+(22, 2, 4, 3,  2,  '2026-01-26', '10:00', 849,  'Completed', 'Master bedroom painting — 2 coats'),
+(23, 3, 5, 5,  NULL,'2026-01-27', '11:00', 649,  'Completed', 'Whirlpool washing machine repair'),
+(24, 4, 6, 7,  3,  '2026-01-28', '14:00', 749,  'Completed', 'Window AC gas refill'),
+(25, 5, 7, 9,  NULL,'2026-01-29', '10:00', 699,  'Completed', 'Lenovo laptop motherboard issue'),
+(26, 6, 8, 11, 4,  '2026-01-30', '11:00', 849,  'Completed', 'Samsung TV — no display after power cut'),
+(27, 7, 9, 13, NULL,'2026-01-31', '09:00', 579,  'Completed', 'Dining chair set repair — 4 chairs'),
+(28, 8, 10,15, 5,  '2026-02-01', '13:00', 239,  'Completed', 'Mens haircut + beard trim'),
+(29, 9, 1, 17, NULL,'2026-02-02', '10:00', 449,  'Completed', 'Bathroom exhaust fan not working'),
+(30, 10, 2,19, 6,  '2026-02-03', '11:00', 399,  'Completed', 'Bathroom deep clean, yellow stains'),
+(31, 1, 6, 1,  NULL,'2026-02-04', '09:00', 769,  'Completed', 'Split AC 1-ton gas refill + service'),
+(32, 2, 7, 3,  7,  '2026-02-05', '10:00', 629,  'Completed', 'MacBook Pro screen replacement'),
+(33, 3, 8, 5,  NULL,'2026-02-06', '11:00', 899,  'Completed', 'LG 55-inch OLED panel issue'),
+(34, 4, 9, 7,  8,  '2026-02-07', '14:00', 529,  'Completed', 'Recliner mechanism repair'),
+(35, 5, 10,9,  NULL,'2026-02-08', '13:00', 509,  'Completed', 'Ladies hair spa and deep condition'),
+(36, 6, 1, 11, 9,  '2026-02-09', '10:00', 259,  'Completed', 'Ceiling fan installation in bedroom'),
+(37, 7, 2, 13, NULL,'2026-02-10', '11:00', 489,  'Completed', 'Sofa dry cleaning and sanitize'),
+(38, 8, 3, 15, 10, '2026-02-11', '09:00', 329,  'Completed', 'Geyser pipe leakage fix'),
+(39, 9, 4, 17, NULL,'2026-02-12', '10:00', 869,  'Completed', 'Exterior wall painting — 3 rooms'),
+(40, 10, 5,19, 1,  '2026-02-13', '14:00', 569,  'Completed', 'Two-wheeler tyre and brake service'),
+(41, 1, 7, 1,  NULL,'2026-02-14', '11:00', 1299, 'Completed', 'Gaming laptop GPU heat issue'),
+(42, 2, 8, 3,  2,  '2026-02-15', '10:00', 399,  'Completed', 'TV remote sensor repair'),
+(43, 3, 9, 5,  NULL,'2026-02-16', '09:00', 699,  'Completed', 'Wooden bookshelf assembly + wall fix'),
+(44, 4, 10,7,  3,  '2026-02-17', '13:00', 729,  'Completed', 'Bridal trial makeup and hair'),
+(45, 5, 1, 9,  NULL,'2026-02-18', '10:00', 299,  'Completed', 'New power socket installation'),
+(46, 6, 2, 11, 4,  '2026-02-19', '11:00', 499,  'Completed', 'Post-renovation cleaning full flat'),
+(47, 7, 3, 13, NULL,'2026-02-20', '14:00', 249,  'Completed', 'Bathroom tap dripping fix'),
+(48, 8, 4, 15, 5,  '2026-02-21', '10:00', 849,  'Completed', 'Kids room wall painting with design'),
+(49, 9, 5, 17, NULL,'2026-02-22', '09:00', 629,  'Completed', 'Microwave and mixer repair'),
+(50, 10, 6,19, 6,  '2026-02-23', '11:00', 749,  'Completed', 'Portable AC installation'),
+(51, 1, 8, 2,  NULL,'2026-02-24', '10:00', 419,  'Completed', 'Smart TV software/firmware update'),
+(52, 2, 9, 4,  7,  '2026-02-25', '14:00', 719,  'Completed', 'Office chair hydraulics repair'),
+(53, 3, 10,6,  NULL,'2026-02-26', '11:00', 519,  'Completed', 'Pedicure and manicure combo'),
+(54, 4, 1, 8,  8,  '2026-02-27', '09:00', 279,  'Completed', 'Switchboard replacement — 2 points'),
+(55, 5, 2, 10, NULL,'2026-02-28', '10:00', 529,  'Completed', 'Refrigerator interior cleaning'),
+(56, 6, 3, 12, 9,  '2026-03-01', '14:00', 359,  'Completed', 'Outdoor tap installation'),
+(57, 7, 4, 14, NULL,'2026-03-02', '11:00', 919,  'Completed', 'Hall + kitchen painting'),
+(58, 8, 5, 16, 10, '2026-03-03', '09:00', 609,  'Completed', 'Water purifier motor repair'),
+(59, 9, 6, 18, NULL,'2026-03-04', '13:00', 829,  'Completed', 'Cassette AC service and drain clean'),
+(60, 10, 7,20, 1,  '2026-03-05', '10:00', 1349, 'Completed', 'Complete system reformat and OS install'),
+-- Cancelled bookings (61-80)
+(61, 1, 1, 1,  NULL,'2026-03-06', '10:00', 449,  'Cancelled', 'NA'),
+(62, 2, 2, 3,  NULL,'2026-03-07', '11:00', 549,  'Cancelled', 'NA'),
+(63, 3, 3, 5,  NULL,'2026-03-08', '09:00', 379,  'Cancelled', 'NA'),
+(64, 4, 4, 7,  NULL,'2026-03-09', '10:00', 949,  'Cancelled', 'NA'),
+(65, 5, 5, 9,  NULL,'2026-03-10', '14:00', 669,  'Cancelled', 'NA'),
+(66, 6, 6, 11, NULL,'2026-03-11', '09:00', 799,  'Cancelled', 'NA'),
+(67, 7, 7, 13, NULL,'2026-03-12', '11:00', 1399, 'Cancelled', 'NA'),
+(68, 8, 8, 15, NULL,'2026-03-13', '15:00', 949,  'Cancelled', 'NA'),
+(69, 9, 9, 17, NULL,'2026-03-14', '10:00', 649,  'Cancelled', 'NA'),
+(70, 10,10, 19,NULL,'2026-03-15', '13:00', 279,  'Cancelled', 'NA'),
+(71, 1, 3, 2,  NULL,'2026-03-16', '09:00', 379,  'Cancelled', 'NA'),
+(72, 2, 4, 4,  NULL,'2026-03-17', '10:00', 949,  'Cancelled', 'NA'),
+(73, 3, 5, 6,  NULL,'2026-03-18', '11:00', 669,  'Cancelled', 'NA'),
+(74, 4, 6, 8,  NULL,'2026-03-19', '14:00', 799,  'Cancelled', 'NA'),
+(75, 5, 7, 10, NULL,'2026-03-20', '10:00', 1399, 'Cancelled', 'NA'),
+(76, 6, 8, 12, NULL,'2026-03-21', '11:00', 949,  'Cancelled', 'NA'),
+(77, 7, 9, 14, NULL,'2026-03-22', '09:00', 649,  'Cancelled', 'NA'),
+(78, 8, 10,16, NULL,'2026-03-23', '13:00', 279,  'Cancelled', 'NA'),
+(79, 9, 1, 18, NULL,'2026-03-24', '10:00', 449,  'Cancelled', 'NA'),
+(80, 10, 2,20, NULL,'2026-03-25', '11:00', 549,  'Cancelled', 'NA'),
+-- Active bookings (81-100)
+(81, 1, 1, 1,  NULL,'2026-05-15', '10:00', 449,  'Pending',     'First time using service'),
+(82, 2, 2, 3,  2,  '2026-05-15', '11:00', 449,  'Pending',     'Please bring mop and bucket'),
+(83, 3, 3, 5,  NULL,'2026-05-16', '09:00', 379,  'Confirmed',   'Gate will be open'),
+(84, 4, 4, 7,  3,  '2026-05-16', '10:00', 799,  'Confirmed',   'Color code: Dulux White 001'),
+(85, 5, 5, 9,  NULL,'2026-05-17', '14:00', 669,  'Confirmed',   'Bosch front-load washing machine'),
+(86, 6, 6, 11, 4,  '2026-05-17', '09:00', 599,  'In-Progress', 'Provider is on site'),
+(87, 7, 7, 13, NULL,'2026-05-18', '11:00', 1399, 'In-Progress', 'Laptop left with technician'),
+(88, 8, 8, 15, 5,  '2026-05-18', '15:00', 699,  'In-Progress', 'Technician checking panel'),
+(89, 9, 9, 17, NULL,'2026-05-19', '10:00', 599,  'Confirmed',   'Bring fabric swatches for matching'),
+(90, 10,10, 19,6,  '2026-05-19', '13:00', 279,  'Confirmed',   'Short bob cut please'),
+(91, 1, 6, 2,  NULL,'2026-05-20', '09:00', 799,  'Pending',     'Carrier AC — 1 year old'),
+(92, 2, 7, 4,  7,  '2026-05-20', '10:00', 749,  'Pending',     'Asus Zenbook — keyboard issue'),
+(93, 3, 8, 6,  NULL,'2026-05-21', '11:00', 949,  'Confirmed',   'Philips 50-inch 4K TV'),
+(94, 4, 9, 8,  8,  '2026-05-21', '14:00', 799,  'Confirmed',   'Teak wood dining table repair'),
+(95, 5, 10,10, NULL,'2026-05-22', '13:00', 569,  'Pending',     'Deep conditioning treatment'),
+(96, 6, 1, 12, 9,  '2026-05-22', '10:00', 299,  'Pending',     'Extra power point near TV'),
+(97, 7, 2, 14, NULL,'2026-05-23', '11:00', 449,  'Confirmed',   'Modular kitchen cleaning'),
+(98, 8, 3, 16, 10, '2026-05-23', '09:00', 279,  'Confirmed',   'Toilet flush valve replacement'),
+(99, 9, 4, 18, NULL,'2026-05-24', '10:00', 919,  'Pending',     'Texture paint for feature wall'),
+(100,10, 5,20, 1,  '2026-05-24', '14:00', 569,  'Pending',     'Honda Activa full service');
+
+-- ============================================================
+-- 16. BookingItem (100 rows — one item per booking)
+-- ============================================================
+INSERT INTO BookingItem (item_no, booking_id, service_id, quantity, unit_price, custom_price) VALUES
+(1,1,1,1,499,449),(1,2,1,1,499,449),(1,3,3,1,399,379),(1,4,4,1,999,799),
+(1,5,5,1,699,669),(1,6,6,1,849,599),(1,7,7,1,1499,1399),(1,8,8,1,999,699),
+(1,9,9,1,649,599),(1,10,10,1,299,279),(1,11,11,1,599,549),(1,12,13,1,299,279),
+(1,13,14,1,1499,1399),(1,14,15,1,799,649),(1,15,16,1,599,549),(1,16,17,1,799,559),
+(1,17,18,1,499,469),(1,18,19,1,849,749),(1,19,20,1,599,569),(1,20,12,1,349,329),
+(1,21,3,1,399,599),(1,22,4,1,999,849),(1,23,5,1,699,649),(1,24,6,1,849,749),
+(1,25,7,1,1499,699),(1,26,8,1,999,849),(1,27,9,1,649,579),(1,28,10,1,299,239),
+(1,29,2,1,299,449),(1,30,1,1,499,399),(1,31,6,1,849,769),(1,32,7,1,1499,629),
+(1,33,8,1,999,899),(1,34,9,1,649,529),(1,35,10,1,299,509),(1,36,2,1,299,259),
+(1,37,1,1,499,489),(1,38,3,1,399,329),(1,39,4,1,999,869),(1,40,5,1,699,569),
+(1,41,7,1,1499,1299),(1,42,8,1,999,399),(1,43,9,1,649,699),(1,44,10,1,299,729),
+(1,45,2,1,299,299),(1,46,1,1,499,499),(1,47,3,1,399,249),(1,48,4,1,999,849),
+(1,49,5,1,699,629),(1,50,6,1,849,749),(1,51,8,1,999,419),(1,52,9,1,649,719),
+(1,53,10,1,299,519),(1,54,12,1,349,279),(1,55,1,1,499,529),(1,56,3,1,399,359),
+(1,57,4,1,999,919),(1,58,5,1,699,609),(1,59,6,1,849,829),(1,60,7,1,1499,1349),
+(1,61,1,1,499,449),(1,62,11,1,599,549),(1,63,3,1,399,379),(1,64,4,1,999,949),
+(1,65,5,1,699,669),(1,66,6,1,849,799),(1,67,7,1,1499,1399),(1,68,8,1,999,949),
+(1,69,9,1,649,649),(1,70,10,1,299,279),(1,71,3,1,399,379),(1,72,4,1,999,949),
+(1,73,5,1,699,669),(1,74,6,1,849,799),(1,75,7,1,1499,1399),(1,76,8,1,999,949),
+(1,77,9,1,649,649),(1,78,10,1,299,279),(1,79,1,1,499,449),(1,80,11,1,599,549),
+(1,81,1,1,499,449),(1,82,11,1,599,449),(1,83,3,1,399,379),(1,84,4,1,999,799),
+(1,85,5,1,699,669),(1,86,6,1,849,599),(1,87,7,1,1499,1399),(1,88,8,1,999,699),
+(1,89,9,1,649,599),(1,90,10,1,299,279),(1,91,6,1,849,799),(1,92,7,1,1499,749),
+(1,93,8,1,999,949),(1,94,9,1,649,799),(1,95,20,1,599,569),(1,96,2,1,299,299),
+(1,97,11,1,599,449),(1,98,13,1,299,279),(1,99,4,1,999,919),(1,100,5,1,699,569);
+
+-- ============================================================
+-- 17. BookingStatusLog (varied statuses for bookings 1-100)
+-- ============================================================
+INSERT INTO BookingStatusLog (log_id, booking_id, status, remarks) VALUES
+-- Completed bookings — each has 4 log entries
+(1,  1, 'Pending',     'Booking created'),(2,  1, 'Confirmed',   'Provider accepted'),(3,  1, 'In-Progress', 'Service started'),(4,  1, 'Completed',   'Service done successfully'),
+(5,  2, 'Pending',     'Booking created'),(6,  2, 'Confirmed',   'Provider accepted'),(7,  2, 'In-Progress', 'Service started'),(8,  2, 'Completed',   'Customer satisfied'),
+(9,  3, 'Pending',     'Booking created'),(10, 3, 'Confirmed',   'Provider accepted'),(11, 3, 'In-Progress', 'Service started'),(12, 3, 'Completed',   'Pipe fixed'),
+(13, 4, 'Pending',     'Booking created'),(14, 4, 'Confirmed',   'Provider accepted'),(15, 4, 'In-Progress', 'Service started'),(16, 4, 'Completed',   'Painting done'),
+(17, 5, 'Pending',     'Booking created'),(18, 5, 'Confirmed',   'Provider accepted'),(19, 5, 'In-Progress', 'Service started'),(20, 5, 'Completed',   'Machine repaired'),
+(21, 6, 'Pending',     'Booking created'),(22, 6, 'Confirmed',   'Provider accepted'),(23, 6, 'In-Progress', 'Service started'),(24, 6, 'Completed',   'AC serviced'),
+(25, 7, 'Pending',     'Booking created'),(26, 7, 'Confirmed',   'Provider accepted'),(27, 7, 'In-Progress', 'Service started'),(28, 7, 'Completed',   'Laptop screen replaced'),
+(29, 8, 'Pending',     'Booking created'),(30, 8, 'Confirmed',   'Provider accepted'),(31, 8, 'In-Progress', 'Service started'),(32, 8, 'Completed',   'TV repaired'),
+(33, 9, 'Pending',     'Booking created'),(34, 9, 'Confirmed',   'Provider accepted'),(35, 9, 'In-Progress', 'Service started'),(36, 9, 'Completed',   'Sofa repaired'),
+(37, 10,'Pending',     'Booking created'),(38, 10,'Confirmed',   'Provider accepted'),(39, 10,'In-Progress', 'Service started'),(40, 10,'Completed',   'Haircut done'),
+-- Abbreviated logs for bookings 11-60 (single completed entry)
+(41, 11,'Completed','Kitchen cleaned'),(42,12,'Completed','Tap installed'),(43,13,'Completed','Waterproofing done'),(44,14,'Completed','Fridge repaired'),
+(45, 15,'Completed','AC serviced'),(46,16,'Completed','Virus removed'),(47,17,'Completed','TV mounted'),(48,18,'Completed','Wardrobe assembled'),
+(49, 19,'Completed','Facial done'),(50,20,'Completed','Switchboard fixed'),(51,21,'Completed','Pipe fixed'),(52,22,'Completed','Room painted'),
+(53, 23,'Completed','Machine repaired'),(54,24,'Completed','AC gas filled'),(55,25,'Completed','Laptop fixed'),(56,26,'Completed','TV repaired'),
+(57, 27,'Completed','Chairs repaired'),(58,28,'Completed','Haircut done'),(59,29,'Completed','Fan replaced'),(60,30,'Completed','Bathroom cleaned'),
+(61, 31,'Completed','AC serviced'),(62,32,'Completed','Screen replaced'),(63,33,'Completed','TV fixed'),(64,34,'Completed','Recliner fixed'),
+(65, 35,'Completed','Hair spa done'),(66,36,'Completed','Fan installed'),(67,37,'Completed','Sofa cleaned'),(68,38,'Completed','Pipe fixed'),
+(69, 39,'Completed','Painting done'),(70,40,'Completed','Bike serviced'),(71,41,'Completed','Laptop fixed'),(72,42,'Completed','TV fixed'),
+(73, 43,'Completed','Bookshelf built'),(74,44,'Completed','Bridal trial done'),(75,45,'Completed','Socket installed'),(76,46,'Completed','Flat cleaned'),
+(77, 47,'Completed','Tap fixed'),(78,48,'Completed','Kids room painted'),(79,49,'Completed','Appliances fixed'),(80,50,'Completed','AC installed'),
+(81, 51,'Completed','TV updated'),(82,52,'Completed','Chair fixed'),(83,53,'Completed','Pedicure done'),(84,54,'Completed','Switchboard replaced'),
+(85, 55,'Completed','Fridge cleaned'),(86,56,'Completed','Tap installed'),(87,57,'Completed','Rooms painted'),(88,58,'Completed','Purifier fixed'),
+(89, 59,'Completed','AC drained'),(90,60,'Completed','OS installed'),
+-- Cancelled bookings (single log each)
+(91, 61,'Cancelled','Provider unavailable'),(92,62,'Cancelled','Customer changed mind'),(93,63,'Cancelled','Schedule conflict'),
+(94, 64,'Cancelled','Better offer found'),(95,65,'Cancelled','Provider no-show'),(96,66,'Cancelled','Emergency at home'),
+(97, 67,'Cancelled','Wrong service booked'),(98,68,'Cancelled','Provider unavailable'),(99,69,'Cancelled','Customer relocated'),
+(100,70,'Cancelled','Refund requested'),(101,71,'Cancelled','Schedule conflict'),(102,72,'Cancelled','Customer changed mind'),
+(103,73,'Cancelled','Provider no-show'),(104,74,'Cancelled','Emergency'),(105,75,'Cancelled','Better deal found'),
+(106,76,'Cancelled','Provider unavailable'),(107,77,'Cancelled','Wrong booking'),(108,78,'Cancelled','Customer out of city'),
+(109,79,'Cancelled','No response from provider'),(110,80,'Cancelled','Double booked'),
+-- Active bookings
+(111,81,'Pending','Booking created — awaiting confirmation'),(112,82,'Pending','Booking created'),(113,83,'Confirmed','Provider confirmed'),
+(114,84,'Confirmed','Provider confirmed'),(115,85,'Confirmed','Provider confirmed'),(116,86,'In-Progress','Provider on site'),
+(117,87,'In-Progress','Laptop received by technician'),(118,88,'In-Progress','Panel under inspection'),(119,89,'Confirmed','Slot confirmed'),
+(120,90,'Confirmed','Provider confirmed'),(121,91,'Pending','Awaiting provider'),(122,92,'Pending','Awaiting provider'),
+(123,93,'Confirmed','Provider confirmed'),(124,94,'Confirmed','Provider confirmed'),(125,95,'Pending','Awaiting provider'),
+(126,96,'Pending','Awaiting provider'),(127,97,'Confirmed','Provider confirmed'),(128,98,'Confirmed','Provider confirmed'),
+(129,99,'Pending','Awaiting provider'),(130,100,'Pending','Awaiting provider');
+
+-- ============================================================
+-- 18. Payment (60 rows — one per completed booking 1-60)
+-- ============================================================
+INSERT INTO Payment (payment_id, booking_id, payment_method, amount, gateway_ref, status, paid_at) VALUES
+(1, 1,  'UPI',    449,  'TXN100001', 'Paid', '2026-01-05 11:00:00'),
+(2, 2,  'Card',   449,  'TXN100002', 'Paid', '2026-01-06 12:30:00'),
+(3, 3,  'Cash',   379,  NULL,        'Paid', '2026-01-07 10:30:00'),
+(4, 4,  'UPI',    799,  'TXN100004', 'Paid', '2026-01-08 12:00:00'),
+(5, 5,  'Wallet', 669,  'TXN100005', 'Paid', '2026-01-09 16:00:00'),
+(6, 6,  'UPI',    599,  'TXN100006', 'Paid', '2026-01-10 11:00:00'),
+(7, 7,  'Card',   1399, 'TXN100007', 'Paid', '2026-01-11 14:00:00'),
+(8, 8,  'UPI',    699,  'TXN100008', 'Paid', '2026-01-12 17:00:00'),
+(9, 9,  'Cash',   599,  NULL,        'Paid', '2026-01-13 12:00:00'),
+(10,10, 'UPI',    279,  'TXN100010', 'Paid', '2026-01-14 14:30:00'),
+(11,11, 'Card',   549,  'TXN100011', 'Paid', '2026-01-15 11:00:00'),
+(12,12, 'Cash',   279,  NULL,        'Paid', '2026-01-16 11:30:00'),
+(13,13, 'UPI',    1399, 'TXN100013', 'Paid', '2026-01-17 14:00:00'),
+(14,14, 'Wallet', 649,  'TXN100014', 'Paid', '2026-01-18 16:30:00'),
+(15,15, 'UPI',    549,  'TXN100015', 'Paid', '2026-01-19 11:00:00'),
+(16,16, 'Card',   559,  'TXN100016', 'Paid', '2026-01-20 12:00:00'),
+(17,17, 'Cash',   469,  NULL,        'Paid', '2026-01-21 17:00:00'),
+(18,18, 'UPI',    749,  'TXN100018', 'Paid', '2026-01-22 13:00:00'),
+(19,19, 'Card',   569,  'TXN100019', 'Paid', '2026-01-23 15:00:00'),
+(20,20, 'UPI',    329,  'TXN100020', 'Paid', '2026-01-24 12:00:00'),
+(21,21, 'Cash',   599,  NULL,        'Paid', '2026-01-25 11:00:00'),
+(22,22, 'UPI',    849,  'TXN100022', 'Paid', '2026-01-26 12:00:00'),
+(23,23, 'Card',   649,  'TXN100023', 'Paid', '2026-01-27 13:00:00'),
+(24,24, 'Wallet', 749,  'TXN100024', 'Paid', '2026-01-28 16:00:00'),
+(25,25, 'UPI',    699,  'TXN100025', 'Paid', '2026-01-29 12:00:00'),
+(26,26, 'Card',   849,  'TXN100026', 'Paid', '2026-01-30 13:00:00'),
+(27,27, 'Cash',   579,  NULL,        'Paid', '2026-01-31 11:00:00'),
+(28,28, 'UPI',    239,  'TXN100028', 'Paid', '2026-02-01 15:00:00'),
+(29,29, 'Card',   449,  'TXN100029', 'Paid', '2026-02-02 12:00:00'),
+(30,30, 'UPI',    399,  'TXN100030', 'Paid', '2026-02-03 13:00:00'),
+(31,31, 'Wallet', 769,  'TXN100031', 'Paid', '2026-02-04 11:00:00'),
+(32,32, 'Card',   629,  'TXN100032', 'Paid', '2026-02-05 12:00:00'),
+(33,33, 'UPI',    899,  'TXN100033', 'Paid', '2026-02-06 13:00:00'),
+(34,34, 'Cash',   529,  NULL,        'Paid', '2026-02-07 16:00:00'),
+(35,35, 'UPI',    509,  'TXN100035', 'Paid', '2026-02-08 15:00:00'),
+(36,36, 'Card',   259,  'TXN100036', 'Paid', '2026-02-09 12:00:00'),
+(37,37, 'Cash',   489,  NULL,        'Paid', '2026-02-10 13:00:00'),
+(38,38, 'UPI',    329,  'TXN100038', 'Paid', '2026-02-11 11:00:00'),
+(39,39, 'Card',   869,  'TXN100039', 'Paid', '2026-02-12 12:00:00'),
+(40,40, 'Wallet', 569,  'TXN100040', 'Paid', '2026-02-13 16:00:00'),
+(41,41, 'UPI',    1299, 'TXN100041', 'Paid', '2026-02-14 13:00:00'),
+(42,42, 'Card',   399,  'TXN100042', 'Paid', '2026-02-15 12:00:00'),
+(43,43, 'Cash',   699,  NULL,        'Paid', '2026-02-16 11:00:00'),
+(44,44, 'UPI',    729,  'TXN100044', 'Paid', '2026-02-17 15:00:00'),
+(45,45, 'Card',   299,  'TXN100045', 'Paid', '2026-02-18 12:00:00'),
+(46,46, 'UPI',    499,  'TXN100046', 'Paid', '2026-02-19 13:00:00'),
+(47,47, 'Cash',   249,  NULL,        'Paid', '2026-02-20 16:00:00'),
+(48,48, 'Card',   849,  'TXN100048', 'Paid', '2026-02-21 12:00:00'),
+(49,49, 'UPI',    629,  'TXN100049', 'Paid', '2026-02-22 11:00:00'),
+(50,50, 'Wallet', 749,  'TXN100050', 'Paid', '2026-02-23 13:00:00'),
+(51,51, 'UPI',    419,  'TXN100051', 'Paid', '2026-02-24 12:00:00'),
+(52,52, 'Card',   719,  'TXN100052', 'Paid', '2026-02-25 13:00:00'),
+(53,53, 'Cash',   519,  NULL,        'Paid', '2026-02-26 11:00:00'),
+(54,54, 'UPI',    279,  'TXN100054', 'Paid', '2026-02-27 12:00:00'),
+(55,55, 'Card',   529,  'TXN100055', 'Paid', '2026-02-28 13:00:00'),
+(56,56, 'UPI',    359,  'TXN100056', 'Paid', '2026-03-01 15:00:00'),
+(57,57, 'Cash',   919,  NULL,        'Paid', '2026-03-02 13:00:00'),
+(58,58, 'UPI',    609,  'TXN100058', 'Paid', '2026-03-03 11:00:00'),
+(59,59, 'Card',   829,  'TXN100059', 'Paid', '2026-03-04 15:00:00'),
+(60,60, 'Wallet', 1349, 'TXN100060', 'Paid', '2026-03-05 12:00:00');
+
+-- ============================================================
+-- 19. Cancellation (20 rows — for cancelled bookings 61-80)
+-- ============================================================
+INSERT INTO Cancellation (cancel_id, booking_id, reason, refund_amount, refund_status) VALUES
+(1,  61, 'Provider unavailable on booked slot',        449,  'Refunded'),
+(2,  62, 'Customer decided to postpone',               549,  'Refunded'),
+(3,  63, 'Schedule conflict — customer out of city',   379,  'Refunded'),
+(4,  64, 'Found a cheaper alternative',                949,  'Refunded'),
+(5,  65, 'Provider did not show up',                   669,  'Refunded'),
+(6,  66, 'Emergency at home — rescheduled later',      0,    'Pending'),
+(7,  67, 'Wrong service category selected',            1399, 'Refunded'),
+(8,  68, 'Provider unavailable due to illness',        949,  'Refunded'),
+(9,  69, 'Customer relocated to another city',         649,  'Refunded'),
+(10, 70, 'Service quality not up to standard',         279,  'Refunded'),
+(11, 71, 'Duplicate booking — cancelled one',          379,  'Refunded'),
+(12, 72, 'Customer changed requirements',              0,    'Rejected'),
+(13, 73, 'Provider did not confirm in time',           669,  'Refunded'),
+(14, 74, 'Weather conditions — outdoor job',           0,    'Pending'),
+(15, 75, 'Opted for yearly subscription instead',      1399, 'Refunded'),
+(16, 76, 'Provider unavailable — replacement sent',    949,  'Refunded'),
+(17, 77, 'Booked wrong date',                          649,  'Refunded'),
+(18, 78, 'Customer on vacation — forgot to cancel',    0,    'Pending'),
+(19, 79, 'No response from provider after 2 hours',    449,  'Refunded'),
+(20, 80, 'Double booked by mistake',                   549,  'Refunded');
+
+-- ============================================================
+-- 20. ProviderReview (40 rows — for a subset of completed bookings)
+-- ============================================================
+INSERT INTO ProviderReview (review_id, provider_id, booking_id, customer_id, rating, comment) VALUES
+(1,  1, 1,  1,  4.5, 'Very professional and on time. Great work!'),
+(2,  2, 2,  2,  4.0, 'Clean and efficient. Will book again.'),
+(3,  3, 3,  3,  5.0, 'Fixed the pipe in under 30 mins. Excellent!'),
+(4,  4, 4,  4,  4.5, 'Beautiful finish. Attention to detail is great.'),
+(5,  5, 5,  5,  3.5, 'Good work but took a bit longer than expected.'),
+(6,  6, 6,  6,  5.0, 'AC cooling perfectly now. Very thorough service.'),
+(7,  7, 7,  7,  4.8, 'Screen replaced in 2 hours. Works like new!'),
+(8,  8, 8,  8,  4.2, 'TV fixed, technician was polite and skilled.'),
+(9,  9, 9,  9,  4.6, 'Sofa looks brand new. Excellent craftsmanship.'),
+(10, 10,10, 10, 5.0, 'Best haircut I have had. Very talented stylist.'),
+(11, 2, 11, 1,  4.0, 'Kitchen sparkling clean. Good job overall.'),
+(12, 3, 12, 2,  4.5, 'Quick tap installation, no mess left behind.'),
+(13, 4, 13, 3,  5.0, 'Waterproofing done perfectly. No leaks at all.'),
+(14, 5, 14, 4,  3.8, 'Refrigerator fixed but took 2 visits to resolve.'),
+(15, 6, 15, 5,  4.7, 'AC performance improved significantly after service.'),
+(16, 7, 16, 6,  4.3, 'Laptop much faster now. All viruses removed.'),
+(17, 8, 17, 7,  4.0, 'TV mounted safely and cleanly. Happy with result.'),
+(18, 9, 18, 8,  4.8, 'Wardrobe assembled perfectly. Sturdy and aligned.'),
+(19, 10,19, 9,  5.0, 'Facial was amazing. Skin feels so fresh and clear.'),
+(20, 1, 20, 10, 4.5, 'Switchboard fixed safely. Explained the issue well.'),
+(21, 3, 21, 1,  4.0, 'Emergency pipe repair — arrived quickly.'),
+(22, 4, 22, 2,  4.5, 'Smooth finish on bedroom walls.'),
+(23, 5, 23, 3,  3.5, 'Machine works but noisy occasionally.'),
+(24, 6, 24, 4,  5.0, 'Gas refill done properly, great cooling now.'),
+(25, 7, 25, 5,  4.8, 'Motherboard repaired and laptop runs fine.'),
+(26, 8, 26, 6,  4.2, 'Display works after board-level fix.'),
+(27, 9, 27, 7,  4.6, 'Chairs repaired neatly, very stable now.'),
+(28, 10,28, 8,  5.0, 'Precise beard trim and clean haircut.'),
+(29, 1, 29, 9,  4.5, 'Fan replaced quietly, no mess at all.'),
+(30, 2, 30, 10, 4.0, 'Bathroom clean but took longer than quoted.'),
+(31, 6, 31, 1,  5.0, 'Split AC works like new after gas refill and service.'),
+(32, 7, 32, 2,  4.8, 'MacBook screen is perfect. Fast turnaround.'),
+(33, 8, 33, 3,  4.2, 'OLED panel issue sorted. Picture quality great.'),
+(34, 9, 34, 4,  4.5, 'Recliner mechanism smooth now. Good work.'),
+(35, 10,35, 5,  5.0, 'Hair spa was relaxing and nourishing.'),
+(36, 1, 36, 6,  4.3, 'Fan installed perfectly. Quiet and balanced.'),
+(37, 2, 37, 7,  4.0, 'Sofa refreshed well. Still has slight odour.'),
+(38, 3, 38, 8,  4.7, 'Geyser pipe leak fixed neatly with no drips.'),
+(39, 4, 39, 9,  4.5, 'Three rooms painted smoothly in one day.'),
+(40, 5, 40, 10, 3.8, 'Bike runs better but one issue still persists.');
+
+-- ============================================================
+-- 21. ServiceReview (30 rows — for subset of completed bookings)
+-- ============================================================
+INSERT INTO ServiceReview (review_id, service_id, booking_id, customer_id, rating, comment) VALUES
+(1,  1,  1,  1,  4.5, 'Bathroom is spotless. Great service.'),
+(2,  1,  2,  2,  4.0, 'Thorough cleaning, smells fresh now.'),
+(3,  3,  3,  3,  5.0, 'Pipe repair was fast and lasting.'),
+(4,  4,  4,  4,  4.5, 'Paint quality is excellent, walls look premium.'),
+(5,  5,  5,  5,  3.5, 'Service okay, machine still has minor noise.'),
+(6,  6,  6,  6,  5.0, 'Gas refill made the AC super cool.'),
+(7,  7,  7,  7,  4.8, 'Screen quality is original-level. Very happy.'),
+(8,  8,  8,  8,  4.2, 'TV picture restored fully. Good service.'),
+(9,  9,  9,  9,  4.6, 'Sofa looks brand new. Fabric match is great.'),
+(10, 10, 10, 10, 5.0, 'Haircut exactly as requested. Loved it.'),
+(11, 11, 11, 1,  4.0, 'Kitchen deep clean was thorough and effective.'),
+(12, 13, 12, 2,  4.5, 'Tap installed quickly with no leaks.'),
+(13, 14, 13, 3,  5.0, 'Waterproofing held through heavy monsoon rains.'),
+(14, 15, 14, 4,  3.8, 'Fridge working but service took two trips.'),
+(15, 16, 15, 5,  4.7, 'Full AC service — filter clean made a big diff.'),
+(16, 17, 16, 6,  4.3, 'Virus removed, laptop is very fast now.'),
+(17, 18, 17, 7,  4.0, 'TV mount is secure. Cable management is clean.'),
+(18, 19, 18, 8,  4.8, 'Wardrobe assembly was smooth and precise.'),
+(19, 20, 19, 9,  5.0, 'Facial was deeply relaxing and skin glows now.'),
+(20, 12, 20, 10, 4.5, 'Switchboard replaced cleanly. Sparking gone.'),
+(21, 6,  31, 1,  5.0, 'AC at perfect temperature after service.'),
+(22, 7,  32, 2,  4.8, 'MacBook screen replacement is seamless.'),
+(23, 8,  33, 3,  4.2, 'OLED panel works great after board fix.'),
+(24, 9,  34, 4,  4.5, 'Recliner is smooth and comfortable again.'),
+(25, 10, 35, 5,  5.0, 'Hair spa left hair silky and manageable.'),
+(26, 2,  36, 6,  4.3, 'New fan is whisper quiet and well balanced.'),
+(27, 1,  37, 7,  4.0, 'Sofa clean but old stains faintly visible.'),
+(28, 3,  38, 8,  4.7, 'Pipe leak repair is clean and solid.'),
+(29, 4,  39, 9,  4.5, 'Three room paint job looks very professional.'),
+(30, 5,  40, 10, 3.8, 'Bike better but one issue still to be fixed.');
+
+-- ============================================================
+-- 22. Complaint (15 rows — various users and bookings)
+-- ============================================================
+INSERT INTO Complaint (complaint_id, user_id, booking_id, subject, description, priority, status, resolution_notes) VALUES
+(1,  5,  5,  'Delay in arrival',       'Provider arrived 1 hour late with no communication.',            'Medium', 'Closed',       'Provider warned. Refund of Rs.50 issued.'),
+(2,  8,  8,  'Incomplete repair',      'TV fixed but remote sensor still not responding after visit.',    'High',   'Closed',       'Provider sent back — issue resolved.'),
+(3,  3,  63, 'No-show provider',       'Provider never arrived for the confirmed booking.',               'High',   'Closed',       'Full refund issued. Provider suspended.'),
+(4,  1,  NULL,'App billing issue',     'Was charged twice for a booking I cancelled before confirmation.','High',   'Closed',       'Duplicate charge reversed in 2 days.'),
+(5,  6,  66, 'Forced cancellation',    'Provider cancelled at last minute before arrival.',               'Medium', 'Under Review', NULL),
+(6,  4,  4,  'Paint quality concern',  'Paint started peeling near windows within 2 weeks of painting.',  'High',   'Under Review', NULL),
+(7,  7,  NULL,'Account access issue',  'Unable to log in to account after password reset.',               'Low',    'Closed',       'Account unlocked. Issue was with OTP delivery.'),
+(8,  9,  9,  'Pricing mismatch',       'Was quoted Rs.599 but charged Rs.649 at checkout.',               'Medium', 'Closed',       'Extra charge refunded. Pricing clarified.'),
+(9,  2,  62, 'Wrong provider sent',    'Booked cleaner but an electrician arrived at the door.',          'High',   'Closed',       'Correct provider sent next day. Apology issued.'),
+(10, 10, 10, 'Haircut dissatisfaction','Style was completely different from what was requested.',         'Medium', 'Closed',       'Partial refund issued. Customer feedback noted.'),
+(11, 3,  NULL,'Coupon not applied',    'FLAT100 coupon was not deducted from final amount at checkout.',  'Low',    'Closed',       'Refund of Rs.100 processed.'),
+(12, 5,  65, 'Provider no-show',       'Provider confirmed but did not arrive and did not call.',         'High',   'Open',         NULL),
+(13, 1,  1,  'Leftover mess',          'Provider left cleaning supplies and dirty cloths at home.',       'Low',    'Open',         NULL),
+(14, 6,  NULL,'Refund not received',   'Cancellation was processed 10 days ago but refund not credited.','High',   'Under Review', NULL),
+(15, 8,  NULL,'Fraudulent provider',   'Provider requested direct cash payment outside the platform.',   'High',   'Open',         NULL);
+
+
