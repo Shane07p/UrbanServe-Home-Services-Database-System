@@ -15,3 +15,7 @@ docs/*.pdf
 
 # Maven build output
 api/target/
+
+# IntelliJ project files
+api/.idea/
+api/*.iml
