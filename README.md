@@ -134,7 +134,7 @@ SELECT place_booking(
 
 ## Normalization
 
-All 22 tables are in **BCNF**. Formal proofs for all tables are documented in `docs/202401017_UrbanServe.pdf`.
+All 22 tables are in **BCNF**.
 
 ---
 
