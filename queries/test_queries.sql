@@ -1,7 +1,4 @@
 -- UrbanServe — Test Queries
--- 18 queries covering: SELECT, JOIN, GROUP BY, HAVING, subqueries,
--- set operations, EXISTS, LIKE, relational division, correlated subqueries
-
 
 -- Q1: All verified providers sorted by experience
 SELECT
