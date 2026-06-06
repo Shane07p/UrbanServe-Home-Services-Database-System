@@ -1,12 +1,13 @@
 package com.urbanserve.api.controller;
 
+import com.urbanserve.api.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/bookings")
@@ -21,8 +22,8 @@ public class BookingController {
 
     @GetMapping
     @Operation(summary = "Full booking details — customer, provider, city, date, amount")
-    public List<Map<String, Object>> getAllBookings() {
-        return jdbc.queryForList("""
+    public List<BookingDto> getAllBookings() {
+        return jdbc.query("""
                 SELECT b.booking_id, b.status AS booking_status,
                        cu.name AS customer_name, sp.bio AS provider_bio,
                        ci.city_name, ar.area_name,
@@ -34,13 +35,13 @@ public class BookingController {
                 JOIN Area ar ON a.area_id = ar.area_id
                 JOIN City ci ON ar.city_id = ci.city_id
                 ORDER BY b.scheduled_date ASC
-                """);
+                """, DataClassRowMapper.newInstance(BookingDto.class));
     }
 
     @GetMapping("/with-coupon")
     @Operation(summary = "All bookings showing coupon used or 'No Coupon'")
-    public List<Map<String, Object>> getBookingsWithCoupon() {
-        return jdbc.queryForList("""
+    public List<BookingCouponDto> getBookingsWithCoupon() {
+        return jdbc.query("""
                 SELECT b.booking_id, cu.name AS customer_name,
                        b.total_amount, b.status,
                        COALESCE(cp.code, 'No Coupon') AS coupon_used,
@@ -49,32 +50,32 @@ public class BookingController {
                 JOIN Customer cu ON b.customer_id = cu.customer_id
                 LEFT JOIN Coupon cp ON b.coupon_id = cp.coupon_id
                 ORDER BY b.booking_id
-                """);
+                """, DataClassRowMapper.newInstance(BookingCouponDto.class));
     }
 
     @GetMapping("/customers/active")
     @Operation(summary = "Customers who have placed at least one booking")
-    public List<Map<String, Object>> getActiveCustomers() {
-        return jdbc.queryForList("""
+    public List<CustomerDto> getActiveCustomers() {
+        return jdbc.query("""
                 SELECT customer_id, name, phone FROM Customer
                 WHERE customer_id IN (SELECT DISTINCT customer_id FROM Booking)
                 ORDER BY customer_id
-                """);
+                """, DataClassRowMapper.newInstance(CustomerDto.class));
     }
 
     @GetMapping("/customers/never-booked")
     @Operation(summary = "Customers who have never placed a booking")
-    public List<Map<String, Object>> getNeverBookedCustomers() {
-        return jdbc.queryForList("""
+    public List<CustomerDto> getNeverBookedCustomers() {
+        return jdbc.query("""
                 SELECT customer_id, name, phone FROM Customer
                 WHERE customer_id NOT IN (SELECT DISTINCT customer_id FROM Booking)
-                """);
+                """, DataClassRowMapper.newInstance(CustomerDto.class));
     }
 
     @GetMapping("/most-expensive-per-customer")
     @Operation(summary = "Most expensive booking per customer")
-    public List<Map<String, Object>> getMostExpensivePerCustomer() {
-        return jdbc.queryForList("""
+    public List<ExpensiveBookingDto> getMostExpensivePerCustomer() {
+        return jdbc.query("""
                 SELECT cu.customer_id, cu.name, b.booking_id,
                        b.status, b.total_amount AS most_expensive_booking
                 FROM Customer cu
@@ -84,6 +85,6 @@ public class BookingController {
                     WHERE b2.customer_id = cu.customer_id
                 )
                 ORDER BY most_expensive_booking DESC
-                """);
+                """, DataClassRowMapper.newInstance(ExpensiveBookingDto.class));
     }
 }

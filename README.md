@@ -1,5 +1,20 @@
 # UrbanServe — Home Services Marketplace Database
 
+## Table of Contents
+
+- [What is UrbanServe?](#what-is-urbanserve)
+- [Schema Overview](#schema-overview)
+- [Project Structure](#project-structure)
+- [REST API](docs/API.md)
+- [Performance Design](docs/PERFORMANCE.md)
+- [BCNF Proof](docs/bcnf_proof.md)
+- [ER Diagram](docs/er_diagram.png)
+- [Setup](#setup)
+- [Query Index](#query-index)
+- [Sample Data](#sample-data)
+
+---
+
 ## What is UrbanServe?
 
 UrbanServe connects customers with verified local service professionals for doorstep home services — plumbing, electrical work, AC servicing, deep cleaning, carpentry, laptop repair, salon, and more. The database manages the complete service lifecycle:

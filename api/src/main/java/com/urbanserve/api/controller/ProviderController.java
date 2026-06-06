@@ -1,12 +1,13 @@
 package com.urbanserve.api.controller;
 
+import com.urbanserve.api.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/providers")
@@ -21,21 +22,21 @@ public class ProviderController {
 
     @GetMapping
     @Operation(summary = "All verified providers sorted by experience")
-    public List<Map<String, Object>> getVerifiedProviders() {
-        return jdbc.queryForList("""
+    public List<ProviderDto> getVerifiedProviders() {
+        return jdbc.query("""
                 SELECT sp.provider_id, u.email, sp.experience_years,
                        sp.bio, sp.avg_rating, sp.verification_status
                 FROM ServiceProvider sp
                 JOIN Users u ON sp.user_id = u.user_id
                 WHERE sp.verification_status = 'Verified'
                 ORDER BY sp.experience_years DESC
-                """);
+                """, DataClassRowMapper.newInstance(ProviderDto.class));
     }
 
     @GetMapping("/reviewed")
     @Operation(summary = "Providers who have received at least one review")
-    public List<Map<String, Object>> getReviewedProviders() {
-        return jdbc.queryForList("""
+    public List<ReviewedProviderDto> getReviewedProviders() {
+        return jdbc.query("""
                 SELECT sp.provider_id, sp.bio, sp.avg_rating, sp.verification_status
                 FROM ServiceProvider sp
                 WHERE EXISTS (
@@ -43,13 +44,13 @@ public class ProviderController {
                     WHERE pr.provider_id = sp.provider_id
                 )
                 ORDER BY sp.avg_rating DESC
-                """);
+                """, DataClassRowMapper.newInstance(ReviewedProviderDto.class));
     }
 
     @GetMapping("/all-docs-submitted")
     @Operation(summary = "Providers who have submitted all 3 required documents (Aadhar, PAN, License)")
-    public List<Map<String, Object>> getFullyDocumentedProviders() {
-        return jdbc.queryForList("""
+    public List<DocumentedProviderDto> getFullyDocumentedProviders() {
+        return jdbc.query("""
                 SELECT sp.provider_id, sp.bio
                 FROM ServiceProvider sp
                 WHERE NOT EXISTS (
@@ -60,13 +61,13 @@ public class ProviderController {
                           AND pd.document_type = required.doc_type
                     )
                 )
-                """);
+                """, DataClassRowMapper.newInstance(DocumentedProviderDto.class));
     }
 
     @GetMapping("/leaderboard")
     @Operation(summary = "Provider leaderboard — rating, reviews, and total bookings")
-    public List<Map<String, Object>> getLeaderboard() {
-        return jdbc.queryForList("""
+    public List<LeaderboardDto> getLeaderboard() {
+        return jdbc.query("""
                 SELECT sp.provider_id, sp.bio AS provider_bio, sp.avg_rating,
                        COUNT(DISTINCT pr.review_id) AS total_reviews,
                        ROUND(AVG(pr.rating)::numeric, 2) AS computed_avg_rating,
@@ -78,6 +79,6 @@ public class ProviderController {
                 HAVING COUNT(pr.review_id) >= 1
                 ORDER BY sp.avg_rating DESC, total_reviews DESC
                 LIMIT 10
-                """);
+                """, DataClassRowMapper.newInstance(LeaderboardDto.class));
     }
 }
