@@ -1,6 +1,5 @@
 # UrbanServe REST API
 
-**Base URL:** `https://urbanserve.shane07p.me`  
 **Swagger UI:** `https://urbanserve.shane07p.me/swagger-ui.html`  
 **OpenAPI spec:** `https://urbanserve.shane07p.me/api-docs`
 
