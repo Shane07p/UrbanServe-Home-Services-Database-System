@@ -4,13 +4,8 @@
 CREATE INDEX idx_users_role           ON Users(role);
 CREATE INDEX idx_users_status         ON Users(status);
 
-CREATE INDEX idx_customer_user        ON Customer(user_id);
-
-CREATE INDEX idx_provider_user        ON ServiceProvider(user_id);
 CREATE INDEX idx_provider_vstatus     ON ServiceProvider(verification_status);
 CREATE INDEX idx_provider_rating      ON ServiceProvider(avg_rating DESC);
-
-CREATE INDEX idx_admin_user           ON Admin(user_id);
 
 CREATE INDEX idx_area_city            ON Area(city_id);
 CREATE INDEX idx_area_pincode         ON Area(pincode);
@@ -48,11 +43,9 @@ CREATE INDEX idx_bitem_service        ON BookingItem(service_id);
 CREATE INDEX idx_bslog_booking        ON BookingStatusLog(booking_id);
 CREATE INDEX idx_bslog_status         ON BookingStatusLog(status);
 
-CREATE INDEX idx_payment_booking      ON Payment(booking_id);
 CREATE INDEX idx_payment_status       ON Payment(status);
 CREATE INDEX idx_payment_method       ON Payment(payment_method);
 
-CREATE INDEX idx_cancel_booking       ON Cancellation(booking_id);
 CREATE INDEX idx_cancel_rstatus       ON Cancellation(refund_status);
 
 CREATE INDEX idx_prev_provider        ON ProviderReview(provider_id);
