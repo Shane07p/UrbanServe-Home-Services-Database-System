@@ -17,7 +17,7 @@
 
 ## What is UrbanServe?
 
-UrbanServe connects customers with verified local service professionals for doorstep home services — plumbing, electrical work, AC servicing, deep cleaning, carpentry, laptop repair, salon, and more. The database manages the complete service lifecycle:
+UrbanServe connects customers with verified local service professionals for doorstep home services — plumbing, electrical work, AC servicing, deep cleaning, carpentry, laptop repair, salon, and more. The database manages the complete service lifecycle of homerservice management system:
 
 **Browse → Book → Assign → Pay → Review**
 
