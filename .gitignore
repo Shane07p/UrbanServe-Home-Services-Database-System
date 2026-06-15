@@ -11,8 +11,6 @@ Thumbs.db
 .vscode/
 *.swp
 
-docs/*.pdf
-
 # Maven build output
 api/target/
 
