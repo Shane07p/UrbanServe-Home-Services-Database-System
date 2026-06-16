@@ -10,9 +10,9 @@ Indexes are created on all foreign key columns and frequently filtered attribute
 | `Customer` | `user_id` | JOIN with Users |
 | `ServiceProvider` | `user_id` | JOIN with Users |
 | `Admin` | `user_id` | JOIN with Users |
-| `Service` | `category_id`, `city_id` | Filter by category/city |
+| `Service` | `category_id` | Filter/JOIN by category |
 | `ServiceVariant` | `service_id` | JOIN with Service |
-| `Offers` | `provider_id`, `service_id` | M:N lookup |
+| `Offers` | `service_id`, `city_id` | M:N lookup + services offered in a city |
 | `ProviderAvailability` | `provider_id` | Filter by provider |
 | `ProviderDocument` | `provider_id` | JOIN with ServiceProvider |
 | `Booking` | `customer_id`, `provider_id`, `address_id`, `coupon_id` | All FK joins |
