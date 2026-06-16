@@ -242,3 +242,11 @@ SET name = 'Deleted User', phone = '0000000000'
 WHERE user_id = 1;
 
 ROLLBACK;
+
+
+-- Q20: Services offered by providers in a given city (uses Offers.city_id)
+SELECT DISTINCT s.service_id, s.service_name, s.base_price, s.duration
+FROM Service s
+JOIN Offers o ON s.service_id = o.service_id
+WHERE o.city_id = 5
+ORDER BY s.base_price DESC;

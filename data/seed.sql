@@ -136,27 +136,27 @@ INSERT INTO Category (category_id, category_name, description) VALUES
 (10, 'Salon & Spa',        'Haircut, grooming, facials, and bridal packages');
 
 -- Service
-INSERT INTO Service (service_id, city_id, category_id, service_name, description, base_price, duration, is_active) VALUES
-(1,  1, 1,  'Bathroom Deep Clean',     'Complete bathroom disinfection and scrubbing',            499,  60,  TRUE),
-(2,  1, 2,  'Fan Repair',              'Ceiling and table fan repair and servicing',               299,  30,  TRUE),
-(3,  2, 3,  'Pipe Leak Repair',        'Detect and fix leaking pipes and joints',                  399,  45,  TRUE),
-(4,  2, 4,  'Interior Wall Painting',  'Per room interior painting with primer',                   999,  120, TRUE),
-(5,  3, 5,  'Washing Machine Repair',  'Top-load and front-load washing machine repair',           699,  90,  TRUE),
-(6,  4, 6,  'AC Gas Refill',           'Split and window AC refrigerant gas recharge',             849,  60,  TRUE),
-(7,  5, 7,  'Laptop Screen Repair',    'Cracked or dead screen replacement',                       1499, 120, TRUE),
-(8,  6, 8,  'LED TV Repair',           'Panel, backlight and board level TV repair',               999,  60,  TRUE),
-(9,  7, 9,  'Sofa Repair',             'Fabric replacement and frame repair for sofas',            649,  90,  TRUE),
-(10, 8, 10, 'Hair Cut & Styling',      'Unisex haircut with wash and blow-dry',                    299,  45,  TRUE),
-(11, 1, 1,  'Kitchen Deep Clean',      'Full kitchen degreasing and appliance exterior clean',     599,  75,  TRUE),
-(12, 1, 2,  'Switchboard Repair',      'Faulty switchboard rewiring and socket replacement',       349,  40,  TRUE),
-(13, 2, 3,  'Water Tap Installation',  'New tap fitting and old tap replacement',                  299,  30,  TRUE),
-(14, 3, 4,  'Waterproofing',           'Terrace and bathroom waterproofing treatment',             1499, 180, TRUE),
-(15, 4, 5,  'Refrigerator Repair',     'Compressor, thermostat, and cooling repair',               799,  90,  TRUE),
-(16, 5, 6,  'AC Full Service',         'Filter clean, coil wash, and performance check',           599,  90,  TRUE),
-(17, 6, 7,  'Laptop Virus Removal',    'Malware removal, OS reinstall, and speed boost',           799,  120, TRUE),
-(18, 7, 8,  'TV Wall Mount',           'Safe wall mounting with wire management',                  499,  60,  TRUE),
-(19, 8, 9,  'Wardrobe Assembly',       'Flat-pack wardrobe assembly with fitting',                 849,  120, TRUE),
-(20, 9, 10, 'Facial & Cleanup',        'Deep pore cleansing facial with steam and massage',        599,  60,  TRUE);
+INSERT INTO Service (service_id, category_id, service_name, description, base_price, duration, is_active) VALUES
+(1,  1,  'Bathroom Deep Clean',     'Complete bathroom disinfection and scrubbing',            499,  60,  TRUE),
+(2,  2,  'Fan Repair',              'Ceiling and table fan repair and servicing',               299,  30,  TRUE),
+(3,  3,  'Pipe Leak Repair',        'Detect and fix leaking pipes and joints',                  399,  45,  TRUE),
+(4,  4,  'Interior Wall Painting',  'Per room interior painting with primer',                   999,  120, TRUE),
+(5,  5,  'Washing Machine Repair',  'Top-load and front-load washing machine repair',           699,  90,  TRUE),
+(6,  6,  'AC Gas Refill',           'Split and window AC refrigerant gas recharge',             849,  60,  TRUE),
+(7,  7,  'Laptop Screen Repair',    'Cracked or dead screen replacement',                       1499, 120, TRUE),
+(8,  8,  'LED TV Repair',           'Panel, backlight and board level TV repair',               999,  60,  TRUE),
+(9,  9,  'Sofa Repair',             'Fabric replacement and frame repair for sofas',            649,  90,  TRUE),
+(10, 10, 'Hair Cut & Styling',      'Unisex haircut with wash and blow-dry',                    299,  45,  TRUE),
+(11, 1,  'Kitchen Deep Clean',      'Full kitchen degreasing and appliance exterior clean',     599,  75,  TRUE),
+(12, 2,  'Switchboard Repair',      'Faulty switchboard rewiring and socket replacement',       349,  40,  TRUE),
+(13, 3,  'Water Tap Installation',  'New tap fitting and old tap replacement',                  299,  30,  TRUE),
+(14, 4,  'Waterproofing',           'Terrace and bathroom waterproofing treatment',             1499, 180, TRUE),
+(15, 5,  'Refrigerator Repair',     'Compressor, thermostat, and cooling repair',               799,  90,  TRUE),
+(16, 6,  'AC Full Service',         'Filter clean, coil wash, and performance check',           599,  90,  TRUE),
+(17, 7,  'Laptop Virus Removal',    'Malware removal, OS reinstall, and speed boost',           799,  120, TRUE),
+(18, 8,  'TV Wall Mount',           'Safe wall mounting with wire management',                  499,  60,  TRUE),
+(19, 9,  'Wardrobe Assembly',       'Flat-pack wardrobe assembly with fitting',                 849,  120, TRUE),
+(20, 10, 'Facial & Cleanup',        'Deep pore cleansing facial with steam and massage',        599,  60,  TRUE);
 
 -- ServiceVariant
 INSERT INTO ServiceVariant (variant_id, service_id, variant_name, price, duration) VALUES
@@ -181,28 +181,29 @@ INSERT INTO ServiceVariant (variant_id, service_id, variant_name, price, duratio
 (19, 10, 'Basic Cut',        299,  45),
 (20, 10, 'Cut + Colour',     799,  90);
 
--- Offers (5 services per provider)
-INSERT INTO Offers (provider_id, service_id, custom_price, is_active) VALUES
--- Provider 1 (Electrician): services 1,2,11,12,18
-(1, 1,  479, TRUE), (1, 2,  279, TRUE), (1, 11, 579, TRUE), (1, 12, 329, TRUE), (1, 18, 479, TRUE),
--- Provider 2 (Cleaner): services 1,11,4,5,9
-(2, 1,  449, TRUE), (2, 11, 549, TRUE), (2, 4,  949, TRUE), (2, 5,  649, TRUE), (2, 9,  599, TRUE),
--- Provider 3 (Plumber): services 3,13,14,5,15
-(3, 3,  379, TRUE), (3, 13, 279, TRUE), (3, 14, 1399, TRUE),(3, 5,  649, TRUE), (3, 15, 749, TRUE),
--- Provider 4 (Painter): services 4,14,1,11,9
-(4, 4,  949, TRUE), (4, 14, 1399, TRUE),(4, 1,  469, TRUE), (4, 11, 569, TRUE), (4, 9,  619, TRUE),
--- Provider 5 (Mechanic): services 5,15,6,16,7
-(5, 5,  669, TRUE), (5, 15, 769, TRUE), (5, 6,  799, TRUE), (5, 16, 569, TRUE), (5, 7,  1399, TRUE),
--- Provider 6 (AC): services 6,16,2,12,15
-(6, 6,  799, TRUE), (6, 16, 549, TRUE), (6, 2,  269, TRUE), (6, 12, 319, TRUE), (6, 15, 749, TRUE),
--- Provider 7 (Laptop): services 7,17,8,18,2
-(7, 7,  1399, TRUE),(7, 17, 749, TRUE), (7, 8,  949, TRUE), (7, 18, 469, TRUE), (7, 2,  279, TRUE),
--- Provider 8 (TV): services 8,18,7,17,9
-(8, 8,  949, TRUE), (8, 18, 469, TRUE), (8, 7,  1449, TRUE),(8, 17, 769, TRUE), (8, 9,  619, TRUE),
--- Provider 9 (Furniture): services 9,19,4,14,1
-(9, 9,  599, TRUE), (9, 19, 799, TRUE), (9, 4,  929, TRUE), (9, 14, 1349, TRUE),(9, 1,  469, TRUE),
--- Provider 10 (Salon): services 10,20,1,11,9
-(10, 10, 279, TRUE),(10, 20, 569, TRUE),(10, 1,  459, TRUE),(10, 11, 559, TRUE),(10, 9, 609, TRUE);
+-- Offers (5 services per provider, with the city each is offered in)
+-- Providers 1 and 5 operate in two cities — so provider_id alone does NOT determine city.
+INSERT INTO Offers (provider_id, service_id, city_id, custom_price, is_active) VALUES
+-- Provider 1 (Electrician): Ahmedabad + Surat
+(1, 1,  1, 479, TRUE), (1, 2,  1, 279, TRUE), (1, 11, 1, 579, TRUE), (1, 12, 2, 329, TRUE), (1, 18, 2, 479, TRUE),
+-- Provider 2 (Cleaner): Ahmedabad
+(2, 1,  1, 449, TRUE), (2, 11, 1, 549, TRUE), (2, 4,  1, 949, TRUE), (2, 5,  1, 649, TRUE), (2, 9,  1, 599, TRUE),
+-- Provider 3 (Plumber): Surat
+(3, 3,  2, 379, TRUE), (3, 13, 2, 279, TRUE), (3, 14, 2, 1399, TRUE),(3, 5,  2, 649, TRUE), (3, 15, 2, 749, TRUE),
+-- Provider 4 (Painter): Vadodara
+(4, 4,  3, 949, TRUE), (4, 14, 3, 1399, TRUE),(4, 1,  3, 469, TRUE), (4, 11, 3, 569, TRUE), (4, 9,  3, 619, TRUE),
+-- Provider 5 (Mechanic): Mumbai + Pune
+(5, 5,  5, 669, TRUE), (5, 15, 5, 769, TRUE), (5, 6,  5, 799, TRUE), (5, 16, 6, 569, TRUE), (5, 7,  6, 1399, TRUE),
+-- Provider 6 (AC): Mumbai
+(6, 6,  5, 799, TRUE), (6, 16, 5, 549, TRUE), (6, 2,  5, 269, TRUE), (6, 12, 5, 319, TRUE), (6, 15, 5, 749, TRUE),
+-- Provider 7 (Laptop): Delhi
+(7, 7,  7, 1399, TRUE),(7, 17, 7, 749, TRUE), (7, 8,  7, 949, TRUE), (7, 18, 7, 469, TRUE), (7, 2,  7, 279, TRUE),
+-- Provider 8 (TV): Delhi
+(8, 8,  7, 949, TRUE), (8, 18, 7, 469, TRUE), (8, 7,  7, 1449, TRUE),(8, 17, 7, 769, TRUE), (8, 9,  7, 619, TRUE),
+-- Provider 9 (Furniture): Jaipur
+(9, 9,  8, 599, TRUE), (9, 19, 8, 799, TRUE), (9, 4,  8, 929, TRUE), (9, 14, 8, 1349, TRUE),(9, 1,  8, 469, TRUE),
+-- Provider 10 (Salon): Indore
+(10, 10, 9, 279, TRUE),(10, 20, 9, 569, TRUE),(10, 1,  9, 459, TRUE),(10, 11, 9, 559, TRUE),(10, 9, 9, 609, TRUE);
 
 -- ProviderAvailability (2 slots per provider)
 INSERT INTO ProviderAvailability (availability_id, provider_id, day_of_week, start_time, end_time) VALUES

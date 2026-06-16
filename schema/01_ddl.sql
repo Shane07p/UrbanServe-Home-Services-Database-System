@@ -98,14 +98,12 @@ CREATE TABLE Category (
 
 CREATE TABLE Service (
     service_id   SERIAL PRIMARY KEY,
-    city_id      INT NOT NULL,
     category_id  INT NOT NULL,
     service_name VARCHAR(100) NOT NULL,
     description  TEXT,
     base_price   FLOAT   NOT NULL CHECK (base_price > 0),
     duration     INT     NOT NULL CHECK (duration > 0),
     is_active    BOOLEAN NOT NULL DEFAULT TRUE,
-    FOREIGN KEY (city_id)     REFERENCES City(city_id),
     FOREIGN KEY (category_id) REFERENCES Category(category_id)
 );
 
@@ -119,14 +117,17 @@ CREATE TABLE ServiceVariant (
 );
 
 -- Junction table for the M:N Offers relationship (ServiceProvider ↔ Service)
+-- A provider can offer a service in multiple cities, so city_id is part of the key.
 CREATE TABLE Offers (
     provider_id  INT NOT NULL,
     service_id   INT NOT NULL,
+    city_id      INT NOT NULL,
     custom_price FLOAT CHECK (custom_price > 0),
     is_active    BOOLEAN NOT NULL DEFAULT TRUE,
-    PRIMARY KEY (provider_id, service_id),
+    PRIMARY KEY (provider_id, service_id, city_id),
     FOREIGN KEY (provider_id) REFERENCES ServiceProvider(provider_id),
-    FOREIGN KEY (service_id)  REFERENCES Service(service_id)
+    FOREIGN KEY (service_id)  REFERENCES Service(service_id),
+    FOREIGN KEY (city_id)     REFERENCES City(city_id)
 );
 
 CREATE TABLE ProviderAvailability (

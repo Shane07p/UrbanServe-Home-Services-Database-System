@@ -95,4 +95,24 @@ public class ServiceController {
         }
         return ResponseEntity.ok(results);
     }
+
+    @GetMapping("/by-city")
+    @Operation(summary = "Services offered by providers in a given city")
+    public ResponseEntity<?> getServicesByCity(
+            @Parameter(description = "City ID", example = "5")
+            @RequestParam int cityId) {
+        List<ServiceDto> results = jdbc.query("""
+                SELECT DISTINCT s.service_id, s.service_name, s.base_price, s.duration
+                FROM Service s
+                JOIN Offers o ON s.service_id = o.service_id
+                WHERE o.city_id = ?
+                ORDER BY s.base_price DESC
+                """, DataClassRowMapper.newInstance(ServiceDto.class), cityId);
+
+        if (results.isEmpty()) {
+            return ResponseEntity.status(404)
+                    .body(Map.of("message", "No services offered in city " + cityId));
+        }
+        return ResponseEntity.ok(results);
+    }
 }

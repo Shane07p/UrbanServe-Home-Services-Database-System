@@ -59,7 +59,7 @@ urbanserve/
 ├── data/
 │   └── seed.sql                # Realistic dataset — 100 bookings, 40 reviews, 15 complaints
 ├── queries/
-│   └── test_queries.sql        # 19 SQL queries covering all major SQL concepts
+│   └── test_queries.sql        # 20 SQL queries covering all major SQL concepts
 ├── docs/
 │   └── er_diagram.png          # ER diagram (Chen notation)
 └── README.md
@@ -145,6 +145,7 @@ SELECT place_booking(
 | Q17 | Most expensive booking per customer | Correlated subquery |
 | Q18 | City revenue summary | Materialized view query |
 | Q19 | Anonymize a user's PII (right-to-erasure) | UPDATE, transaction (BEGIN/ROLLBACK) |
+| Q20 | Services offered in a given city | JOIN via Offers, DISTINCT |
 
 ---
 

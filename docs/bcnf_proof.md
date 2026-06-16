@@ -181,12 +181,11 @@ category_id → description
 | Attribute | Type |
 |---|---|
 | service_id | PK |
-| category_id, city_id, service_name, description, base_price, duration, is_active | Non-key |
+| category_id, service_name, description, base_price, duration, is_active | Non-key |
 
 **Functional Dependencies:**
 ```
 service_id → category_id
-service_id → city_id
 service_id → service_name
 service_id → description
 service_id → base_price
@@ -476,6 +475,25 @@ complaint_id → created_at
 
 ---
 
+### 22. Offers
+
+| Attribute | Type |
+|---|---|
+| (provider_id, service_id, city_id) | Composite PK |
+| custom_price, is_active | Non-key |
+
+**Functional Dependencies:**
+```
+(provider_id, service_id, city_id) → custom_price
+(provider_id, service_id, city_id) → is_active
+```
+
+**Candidate Keys:** {provider_id, service_id, city_id}
+
+The only non-trivial FDs have the full composite key on the left-hand side. Crucially, `provider_id → city_id` does **not** hold — a provider may offer services in multiple cities — so `city_id` is genuinely part of the key and there is no partial dependency. The composite key is a superkey. **Relation is in BCNF.** ✓
+
+---
+
 ## Summary
 
 | # | Table | Candidate Keys | BCNF |
@@ -501,7 +519,8 @@ complaint_id → created_at
 | 19 | ProviderReview | {review_id}, {booking_id} | ✓ |
 | 20 | ServiceReview | {review_id}, {booking_id} | ✓ |
 | 21 | Complaint | {complaint_id} | ✓ |
+| 22 | Offers | {provider_id, service_id, city_id} | ✓ |
 
-**All 21 relations in the UrbanServe schema are in BCNF.**
+**All 22 relations in the UrbanServe schema are in BCNF.**
 
 For every non-trivial functional dependency X → Y across all tables, X is a superkey of its respective relation. No partial dependencies (violating 2NF) or transitive dependencies through non-key attributes (violating 3NF) exist, confirming that all relations satisfy BCNF.

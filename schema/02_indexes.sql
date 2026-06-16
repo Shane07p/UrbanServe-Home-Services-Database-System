@@ -14,13 +14,13 @@ CREATE INDEX idx_address_area         ON Address(area_id);
 CREATE INDEX idx_address_customer     ON Address(customer_id);
 
 CREATE INDEX idx_service_category     ON Service(category_id);
-CREATE INDEX idx_service_city         ON Service(city_id);
 CREATE INDEX idx_service_active       ON Service(is_active);
 CREATE INDEX idx_service_price        ON Service(base_price);
 
 CREATE INDEX idx_variant_service      ON ServiceVariant(service_id);
 
 CREATE INDEX idx_offers_service       ON Offers(service_id);
+CREATE INDEX idx_offers_city          ON Offers(city_id);
 CREATE INDEX idx_offers_active        ON Offers(is_active);
 
 CREATE INDEX idx_avail_provider       ON ProviderAvailability(provider_id);
