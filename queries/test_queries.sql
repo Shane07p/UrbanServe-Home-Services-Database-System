@@ -226,3 +226,19 @@ SELECT
     active_providers
 FROM mv_city_revenue_summary
 ORDER BY total_revenue DESC NULLS LAST;
+
+
+-- Q19: Right-to-erasure — anonymize a user's personal data (name, email, phone)
+-- while keeping their booking and payment history for financial retention.
+-- Wrapped in a transaction; switch ROLLBACK to COMMIT to apply it for real.
+BEGIN;
+
+UPDATE Users
+SET email = 'deleted_1@anon.invalid', password = ''
+WHERE user_id = 1;
+
+UPDATE Customer
+SET name = 'Deleted User', phone = '0000000000'
+WHERE user_id = 1;
+
+ROLLBACK;
