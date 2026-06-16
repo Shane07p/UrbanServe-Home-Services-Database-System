@@ -24,6 +24,7 @@
 | GET | `/api/services/search` | Search services by name keyword (ILIKE) | `name` — e.g. `repair` |
 | GET | `/api/services/category-stats` | COUNT / AVG / MIN / MAX price per category | — |
 | GET | `/api/services/expensive-categories` | Categories with average price above threshold | `minAvgPrice` (default 600) |
+| GET | `/api/services/by-city` | Services offered by providers in a given city (JOIN via Offers) | `cityId` — e.g. `5` |
 
 ### Bookings
 
@@ -107,7 +108,7 @@
 | Status | When |
 |---|---|
 | 200 | Success |
-| 404 | Search returns no results (only for `/search` and `/expensive-categories`) |
+| 404 | Search returns no results (only for `/search`, `/expensive-categories`, and `/by-city`) |
 | 500 | Database connection error |
 
 ---
