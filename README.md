@@ -169,3 +169,11 @@ All 22 tables are in **BCNF**.
 | Provider Reviews | 40 |
 | Service Reviews | 30 |
 | Complaints | 15 |
+
+---
+
+## License & Copyright
+
+© 2026 Shane Christian. All rights reserved.
+
+This project and its source code are the intellectual property of the author. No part may be reproduced, distributed, or used without the author's permission.
