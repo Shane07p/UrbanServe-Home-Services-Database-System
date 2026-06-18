@@ -58,6 +58,9 @@ LEFT JOIN Payment    p  ON b.booking_id   = p.booking_id;
 
 -- Materialized view: provider leaderboard by avg rating
 -- Refresh: REFRESH MATERIALIZED VIEW mv_provider_leaderboard;
+-- Each table's aggregates are pre-computed in a derived table (one pass each),
+-- then joined 1:1 to ServiceProvider. This avoids the review x booking fan-out
+-- that would otherwise inflate the counts.
 CREATE MATERIALIZED VIEW mv_provider_leaderboard AS
 SELECT
     sp.provider_id,
@@ -65,16 +68,27 @@ SELECT
     sp.bio,
     sp.experience_years,
     sp.verification_status,
-    COUNT(pr.review_id)                        AS total_reviews,
-    ROUND(AVG(pr.rating)::numeric, 2)          AS avg_rating,
-    MAX(pr.rating)                             AS highest_rating,
-    MIN(pr.rating)                             AS lowest_rating,
-    COUNT(DISTINCT b.booking_id)               AS total_bookings
+    COALESCE(r.total_reviews, 0)   AS total_reviews,
+    r.avg_rating,
+    r.highest_rating,
+    r.lowest_rating,
+    COALESCE(bk.total_bookings, 0) AS total_bookings
 FROM ServiceProvider sp
-JOIN Users           u  ON sp.user_id     = u.user_id
-LEFT JOIN ProviderReview pr ON sp.provider_id = pr.provider_id
-LEFT JOIN Booking    b  ON sp.provider_id = b.provider_id
-GROUP BY sp.provider_id, u.email, sp.bio, sp.experience_years, sp.verification_status
+JOIN Users u ON sp.user_id = u.user_id
+LEFT JOIN (
+    SELECT provider_id,
+           COUNT(*)                       AS total_reviews,
+           ROUND(AVG(rating)::numeric, 2) AS avg_rating,
+           MAX(rating)                    AS highest_rating,
+           MIN(rating)                    AS lowest_rating
+    FROM ProviderReview
+    GROUP BY provider_id
+) r  ON r.provider_id  = sp.provider_id
+LEFT JOIN (
+    SELECT provider_id, COUNT(*) AS total_bookings
+    FROM Booking
+    GROUP BY provider_id
+) bk ON bk.provider_id = sp.provider_id
 ORDER BY avg_rating DESC NULLS LAST, total_reviews DESC;
 
 CREATE UNIQUE INDEX ON mv_provider_leaderboard(provider_id);
