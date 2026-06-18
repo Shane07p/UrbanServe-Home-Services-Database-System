@@ -29,13 +29,10 @@ Indexes are created on all foreign key columns and frequently filtered attribute
 ### Filter Indexes
 | Table | Column(s) | Reason |
 |---|---|---|
-| `Booking` | `status` | Filter by booking status (Completed / Cancelled / Pending) |
-| `Booking` | `scheduled_date` | Date range queries |
 | `Service` | `is_active` | Most queries filter active services only |
 | `ServiceProvider` | `verification_status` | Filter verified providers |
 | `ProviderDocument` | `verification_status` | Filter verified docs |
 | `Payment` | `status` | Filter paid/pending/failed payments |
-| `Complaint` | `status`, `priority` | Admin dashboard filtering |
 
 ---
 

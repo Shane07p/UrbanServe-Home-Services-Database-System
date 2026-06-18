@@ -1,14 +1,11 @@
 -- UrbanServe — Indexes
--- Covers FK columns, status/date filter columns, and composite lookups
-
-CREATE INDEX idx_users_role           ON Users(role);
-CREATE INDEX idx_users_status         ON Users(status);
+-- Foreign-key columns (for joins + referential-integrity checks) plus the
+-- non-key columns actually filtered or sorted by the query set.
 
 CREATE INDEX idx_provider_vstatus     ON ServiceProvider(verification_status);
 CREATE INDEX idx_provider_rating      ON ServiceProvider(avg_rating DESC);
 
 CREATE INDEX idx_area_city            ON Area(city_id);
-CREATE INDEX idx_area_pincode         ON Area(pincode);
 
 CREATE INDEX idx_address_area         ON Address(area_id);
 CREATE INDEX idx_address_customer     ON Address(customer_id);
@@ -21,10 +18,8 @@ CREATE INDEX idx_variant_service      ON ServiceVariant(service_id);
 
 CREATE INDEX idx_offers_service       ON Offers(service_id);
 CREATE INDEX idx_offers_city          ON Offers(city_id);
-CREATE INDEX idx_offers_active        ON Offers(is_active);
 
 CREATE INDEX idx_avail_provider       ON ProviderAvailability(provider_id);
-CREATE INDEX idx_avail_day            ON ProviderAvailability(day_of_week);
 
 CREATE INDEX idx_doc_provider         ON ProviderDocument(provider_id);
 CREATE INDEX idx_doc_vstatus          ON ProviderDocument(verification_status);
@@ -33,25 +28,17 @@ CREATE INDEX idx_booking_customer     ON Booking(customer_id);
 CREATE INDEX idx_booking_provider     ON Booking(provider_id);
 CREATE INDEX idx_booking_address      ON Booking(address_id);
 CREATE INDEX idx_booking_coupon       ON Booking(coupon_id);
-CREATE INDEX idx_booking_status       ON Booking(status);
-CREATE INDEX idx_booking_date         ON Booking(scheduled_date);
-CREATE INDEX idx_booking_status_date  ON Booking(status, scheduled_date);
 
 CREATE INDEX idx_bitem_booking        ON BookingItem(booking_id);
 CREATE INDEX idx_bitem_service        ON BookingItem(service_id);
 
 CREATE INDEX idx_bslog_booking        ON BookingStatusLog(booking_id);
-CREATE INDEX idx_bslog_status         ON BookingStatusLog(status);
 
 CREATE INDEX idx_payment_status       ON Payment(status);
-CREATE INDEX idx_payment_method       ON Payment(payment_method);
-
-CREATE INDEX idx_cancel_rstatus       ON Cancellation(refund_status);
 
 CREATE INDEX idx_prev_provider        ON ProviderReview(provider_id);
 CREATE INDEX idx_prev_booking         ON ProviderReview(booking_id);
 CREATE INDEX idx_prev_customer        ON ProviderReview(customer_id);
-CREATE INDEX idx_prev_rating          ON ProviderReview(rating DESC);
 
 CREATE INDEX idx_srev_service         ON ServiceReview(service_id);
 CREATE INDEX idx_srev_booking         ON ServiceReview(booking_id);
@@ -59,5 +46,3 @@ CREATE INDEX idx_srev_customer        ON ServiceReview(customer_id);
 
 CREATE INDEX idx_complaint_user       ON Complaint(user_id);
 CREATE INDEX idx_complaint_booking    ON Complaint(booking_id);
-CREATE INDEX idx_complaint_status     ON Complaint(status);
-CREATE INDEX idx_complaint_priority   ON Complaint(priority);
