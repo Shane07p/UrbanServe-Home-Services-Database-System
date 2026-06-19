@@ -55,7 +55,8 @@ urbanserve/
 ├── schema/
 │   ├── 01_ddl.sql              # All 22 tables with constraints (SERIAL PKs, CHECK, NOT NULL)
 │   ├── 02_indexes.sql          # Indexes on FK columns and frequently filtered columns
-│   └── 03_views_triggers.sql   # Trigger, views, materialized views, stored procedure
+│   ├── 03_views_triggers.sql   # Trigger, views, materialized views, stored procedure
+│   └── 04_security.sql         # Row-Level Security + Supabase advisory hardening
 ├── data/
 │   └── seed.sql                # Realistic dataset — 100 bookings, 40 reviews, 15 complaints
 ├── queries/
@@ -119,6 +120,24 @@ SELECT place_booking(
 );
 -- Returns the new booking_id
 ```
+
+---
+
+## Security (`schema/04_security.sql`)
+
+Row-Level Security is enabled on all 22 tables to lock down Supabase's
+auto-generated public PostgREST API — with RLS on and no policies, the public
+`anon`/`authenticated` roles are denied by default. The Spring Boot backend
+connects as the `postgres` owner, which bypasses RLS, so the API is unaffected.
+
+| Measure | Purpose |
+|---|---|
+| `ENABLE ROW LEVEL SECURITY` on all tables | Deny-all to public API roles |
+| `security_invoker` on `v_booking_summary` | View runs as caller, not owner |
+| Pinned `search_path` on functions | Prevents search-path hijacking |
+| `REVOKE SELECT` on materialized views | Blocks public read (MVs can't use RLS) |
+
+Clears all Supabase Security Advisor warnings.
 
 ---
 
