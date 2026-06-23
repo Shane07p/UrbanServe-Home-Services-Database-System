@@ -8,7 +8,7 @@
 - [REST API](docs/API.md)
 - [Performance Design](docs/PERFORMANCE.md)
 - [BCNF Proof](docs/bcnf_proof.md)
-- [ER Diagram](docs/er_diagram.png)
+- [ER Diagram](docs/er_diagram.pdf)
 - [Setup](#setup)
 - [Query Index](#query-index)
 - [Sample Data](#sample-data)
@@ -62,7 +62,7 @@ urbanserve/
 ├── queries/
 │   └── test_queries.sql        # 20 SQL queries covering all major SQL concepts
 ├── docs/
-│   └── er_diagram.png          # ER diagram (Chen notation)
+│   └── er_diagram.pdf          # ER diagram (Chen notation)
 └── README.md
 ```
 
