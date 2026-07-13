@@ -618,3 +618,25 @@ INSERT INTO Complaint (complaint_id, user_id, booking_id, subject, description, 
 (15, 8,  NULL,'Fraudulent provider',   'Provider requested direct cash payment outside the platform.',   'High',   'Open',         NULL);
 
 
+-- Resync every SERIAL sequence to its table's current MAX id.
+-- Rows above were seeded with explicit ids, which does NOT advance the
+-- underlying sequence — so the next auto-generated id would collide with an
+-- existing row. This winds each sequence forward past the seeded data.
+DO $$
+DECLARE r RECORD;
+BEGIN
+    FOR r IN
+        SELECT s.relname AS seq, t.relname AS tbl, a.attname AS col
+        FROM pg_class s
+        JOIN pg_depend d    ON d.objid = s.oid
+        JOIN pg_class t     ON t.oid = d.refobjid
+        JOIN pg_attribute a ON a.attrelid = t.oid AND a.attnum = d.refobjsubid
+        WHERE s.relkind = 'S'
+          AND t.relnamespace = 'public'::regnamespace
+    LOOP
+        EXECUTE format('SELECT setval(%L, COALESCE((SELECT MAX(%I) FROM public.%I), 1))',
+                       r.seq, r.col, r.tbl);
+    END LOOP;
+END $$;
+
+
