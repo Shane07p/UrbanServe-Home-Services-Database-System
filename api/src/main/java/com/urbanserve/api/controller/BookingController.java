@@ -3,6 +3,7 @@ package com.urbanserve.api.controller;
 import com.urbanserve.api.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.DataClassRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,20 @@ public class BookingController {
 
     public BookingController(JdbcTemplate jdbc) {
         this.jdbc = jdbc;
+    }
+
+    @PostMapping
+    @Operation(summary = "Place a booking atomically — inserts Booking + first item + 'Pending' status log")
+    public ResponseEntity<BookingCreatedDto> placeBooking(@RequestBody PlaceBookingRequest req) {
+        Integer bookingId = jdbc.queryForObject("""
+                SELECT place_booking(?, ?, ?, ?, CAST(? AS DATE), CAST(? AS TIME),
+                                     ?, ?, ?, ?, ?)
+                """, Integer.class,
+                req.customerId(), req.providerId(), req.addressId(), req.couponId(),
+                req.scheduledDate(), req.scheduledTime(), req.totalAmount(),
+                req.specialInstructions(), req.serviceId(), req.quantity(), req.unitPrice());
+        return ResponseEntity.status(201)
+                .body(new BookingCreatedDto(bookingId, "Booking placed successfully"));
     }
 
     @GetMapping
