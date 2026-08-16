@@ -30,6 +30,7 @@
 
 | Method | Path | Description | Parameters |
 |---|---|---|---|
+| POST | `/api/bookings` | Place a booking atomically — inserts Booking + first item + 'Pending' status log via the `place_booking` stored procedure | JSON body (see example) |
 | GET | `/api/bookings` | Full booking details — customer, provider, city, date, amount | — |
 | GET | `/api/bookings/with-coupon` | All bookings with coupon code used or 'No Coupon' (LEFT JOIN + COALESCE) | — |
 | GET | `/api/bookings/customers/active` | Customers who placed at least one booking | — |
@@ -84,6 +85,28 @@
 { "message": "No services found matching 'xyz'" }
 ```
 
+### `POST /api/bookings`
+Request body:
+```json
+{
+  "customerId": 3,
+  "providerId": 6,
+  "addressId": 3,
+  "couponId": 1,
+  "scheduledDate": "2024-06-01",
+  "scheduledTime": "10:00:00",
+  "totalAmount": 800.0,
+  "specialInstructions": "Please bring own tools",
+  "serviceId": 2,
+  "quantity": 1,
+  "unitPrice": 800.0
+}
+```
+**201 response:**
+```json
+{ "bookingId": 101, "message": "Booking placed successfully" }
+```
+
 ### `GET /api/cities/revenue`
 ```json
 [
@@ -108,8 +131,9 @@
 | Status | When |
 |---|---|
 | 200 | Success |
+| 201 | Booking created (`POST /api/bookings`) |
 | 404 | Search returns no results (only for `/search`, `/expensive-categories`, and `/by-city`) |
-| 500 | Database connection error |
+| 500 | Database error — e.g. a booking referencing a non-existent foreign key (transaction rolls back, no partial rows) |
 
 ---
 
@@ -118,8 +142,8 @@
 | Layer | Technology |
 |---|---|
 | Runtime | Java 17 |
-| Framework | Spring Boot 3.2.0 |
+| Framework | Spring Boot 3.5.15 |
 | Database client | JdbcTemplate (no ORM) |
-| Database | PostgreSQL 15 on Supabase |
-| API docs | springdoc-openapi 2.3.0 |
+| Database | PostgreSQL 17 on Supabase |
+| API docs | springdoc-openapi 2.8.17 |
 | Hosting | Digital Ocean App Platform |
